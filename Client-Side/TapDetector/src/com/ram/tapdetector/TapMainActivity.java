@@ -12,6 +12,8 @@ import android.view.MotionEvent;
 public class TapMainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
     }
 
     @Override
@@ -25,7 +27,5 @@ public class TapMainActivity extends Activity {
         }
         return false;
     }
-
-
 
 }
