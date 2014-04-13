@@ -19,6 +19,5 @@ public class CallManager extends BroadcastReceiver {
            } catch (Exception e) {
              e.printStackTrace();
         }
-    }
-    
+    }   
 }
