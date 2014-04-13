@@ -4,7 +4,7 @@
     <facet type="android" name="Android">
       <configuration>
         <proGuardCfgFiles>
-          <file>file://$USER_HOME$/Desktop/sdk/tools/proguard/proguard-android.txt</file>
+          <file>file://%MODULE_SDK_HOME% 2/tools/proguard/proguard-android.txt</file>
         </proGuardCfgFiles>
       </configuration>
     </facet>
