@@ -25,8 +25,8 @@
     .container .fifteen.columns                 { width: 880px; }
     .container .sixteen.columns                 { width: 940px; }
 
-    .container .one-third.column                { width: 300px; }
-    .container .two-thirds.column               { width: 620px; }
+    .container .one-third.column                { width: 400px; }
+    .container .two-thirds.column               { width: 400px; }
 
     /* Offsets */
     .container .offset-by-one                   { padding-left: 60px;  }
@@ -71,10 +71,9 @@
         .container .fifteen.columns                 { width: 700px; }
         .container .sixteen.columns                 { width: 748px; }
 
-        .container .one-third.column                { width: 236px; }
-        .container .two-thirds.column               { width: 492px; }
+        .container .one-third.column                { width: 400px; }
+        .container .two-thirds.column               { width: 400px; }
 
-        /* Offsets */
         .container .offset-by-one                   { padding-left: 48px; }
         .container .offset-by-two                   { padding-left: 96px; }
         .container .offset-by-three                 { padding-left: 144px; }
@@ -117,7 +116,6 @@
         .container .one-third.column,
         .container .two-thirds.column  { width: 400px; }
 
-        /* Offsets */
         .container .offset-by-one,
         .container .offset-by-two,
         .container .offset-by-three,
