@@ -1,4 +1,4 @@
-public class CallManager extends Broadcast Receiver {
+public class CallManager extends BroadcastReceiver {
 
     public abstract void onReceive(Context context, Intent intent) {
         

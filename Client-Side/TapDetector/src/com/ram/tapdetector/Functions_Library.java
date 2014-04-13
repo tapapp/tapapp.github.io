@@ -94,7 +94,6 @@ public class Functions_Library extends AudioManager{
             }
         }, new IntentFilter(SENT));
  
-        //---when the SMS has been delivered---
         registerReceiver(new BroadcastReceiver(){
             @Override
             public void onReceive(Context arg0, Intent arg1) {
@@ -115,8 +114,5 @@ public class Functions_Library extends AudioManager{
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);        
     }
-
-
-
 
 }
