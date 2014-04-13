@@ -115,7 +115,7 @@
         .container .fifteen.columns,
         .container .sixteen.columns,
         .container .one-third.column,
-        .container .two-thirds.column  { width: 300px; }
+        .container .two-thirds.column  { width: 400px; }
 
         /* Offsets */
         .container .offset-by-one,
