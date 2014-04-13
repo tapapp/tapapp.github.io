@@ -107,7 +107,7 @@ ul.mainMenu li a:hover {color: #FF6A00;
 /*
 * Orange
 */
-.orange {width: 100%; float: left; clear: both; background: #ff6a00; margin: 50px 0; padding: 45px 0; color: #fff; text-align: center; position: relative;z-index: 1;}
+.orange {width: 100%; float: left; clear: both; background: #0076ff; margin: 50px 0; padding: 45px 0; color: #fff; text-align: center; position: relative;z-index: 1;}
 .orange h2 {width: 100%; margin: 20px 0 50px; text-align: center; text-shadow: none;}
 .orange p {width: 600px; margin: 0 auto 30px; color: #fff; text-align: center;}
 .orange a.dalej {display: block; width: 185px; background: #df4a00; color: #fff; margin: 0 auto 20px; padding: 10px 20px; font-size: 12px; text-transform: uppercase;
