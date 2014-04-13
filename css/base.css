@@ -98,12 +98,6 @@ ul.mainMenu li a:hover {color: #FF6A00;
     transition: color .12s ease-in-out;
 }
 
-
-
-
-
-
-
 /*
 * Orange
 */
@@ -252,8 +246,6 @@ footer .social a:hover img {opacity: 1;}
 	nav .container .logo {margin-bottom: 20px; text-align: center;}
 
 	.orange p {width: 200px;}
-
-
 
 	form, label, input  {width: 300px;}
 	input[type="submit"] {width: 302px;}
