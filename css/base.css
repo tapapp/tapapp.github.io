@@ -200,8 +200,8 @@ a.green:hover {background: #36ae7e}
 /*
 * Footer
 */
-footer {width: 100%; float: left; margin: 20px 0 0; padding: 30px 0; background: #333;}
-footer h5 {color: #ccc;}
+footer {width: 100%; float: left; margin: 20px 0 0; padding: 30px 0; background: #747474;}
+footer h5 {color: #e3e3e3;}
 footer p {color: #aaa; line-height: 15px; font-size: 12px; margin-bottom: 7px;}
 footer a {color: #ddd;}
 footer a:hover {color: #ff6a00;}
