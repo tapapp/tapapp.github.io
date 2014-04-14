@@ -1,118 +1,172 @@
 package com.ram.tapdetector;
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
+import	android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Parcel;
+import android.telephony.SmsManager;
+import 	android.net.Uri;
+import android.util.Log;
+import android.widget.Toast;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
-public class Functions_Library extends AudioManager{
+public class Functions_Library {
 
+    ArrayList<HashMap<String,String>> song= new  ArrayList<HashMap<String,String>>();
+    ArrayList<Integer> rec= new ArrayList<Integer>();
     public final int STREAM_MUSIC=2;
+    SongList songlist;
     public final int ADJUST_RAISE=1;
     public final int ADJUST_LOWER=1;
+    private int index;
+    private boolean crap=false;
+    private boolean shuffle = true;
+    MediaPlayer mediaPlayer;
+
+    public Functions_Library( ArrayList<HashMap<String,String>> s) {
+        rec.add(5);
+        song=s;
+
+        mediaPlayer = new MediaPlayer();
+
+    }
+    public void playSong(int songIndex)  {
+
+        index=songIndex;
+            try {
+                mediaPlayer.reset();
+                mediaPlayer.setDataSource(song.get(songIndex).get("path"));
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+                mediaPlayer.setVolume(100.0f,10.0f);
+
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
 
 
+    public void complete() {
 
-    public Functions_Library()
+        if(!shuffle) {
+            if (index < (song.size() - 1)) {
+                p();
+                index++;
+                playSong(index);
+
+            } else {
+                p();
+                index = 0;
+                playSong(index);
+            }
+        }
+        else {
+            if(rec.size()==song.size()) {
+                for(int x=0;x<rec.size()-1;x++)
+                    rec.remove(x);
+            }
+            int rand = (int) (Math.random() * song.size() - 1);
+            for(int x=0;x<rec.size();x++)
+            {
+                if(rand!=rec.get(x))
+                {
+                    p();
+                    playSong(rand);
+                    rec.add(rand);
+                }
+            }
+
+        }
+
+    }
+    public void changeShuffle()
     {
+        if(shuffle) {
+        shuffle=false;
+        }
+        else
+        {
+            shuffle=true;
+        }
 
-    
+    }
+
+    public boolean Playing()
+    {
+        return mediaPlayer.isPlaying();
+    }
+    public void stop()
+    {
+        mediaPlayer.stop();
+    }
+    public void p() {
+        mediaPlayer.pause();
+    }
+    public void s() {
+        mediaPlayer.start();
+    }
+    public int getDur()
+    {
+        return mediaPlayer.getDuration();
+    }
+    public int getPos() {
+
+           return mediaPlayer.getCurrentPosition();
+    }
+    public void skip()
+    {
+           if(Playing()) {
+               mediaPlayer.seekTo(((int) (getDur() - getPos()) + getPos()));
+               complete();
+           }
+
+    }
+    public void back()
+    {
+        if(Playing()) {
+            if (getPos() < 100) {
+                p();
+                playSong(index - 1);
+                index--;
+            } else {
+                p();
+                playSong(index);
+                mediaPlayer.seekTo(0);
+            }
+        }
+
     }
 
     public int getMusicStream()
     {
             return STREAM_MUSIC;
     }
-    public void Volume(int i ,int j)
-    {
-        if(i>0) {
-            adjustVolume(ADJUST_RAISE, j);
-        }
-        if(i<0) {
 
-            adjustVolume(ADJUST_LOWER, j);
-        }
-    }
-    public void Volume(int q, int i ,int j)
-    {
-        if(i>0) {
-            adjustStreamVolume(q, i, j);
-        }
-        if(i<0) {
 
-            adjustStreamVolume(q, i*-1, j);
-        }
-    }
-    public int getMAX(int q)
-    {
-        return getStreamMaxVolume(q);
-    }
-    public int getCurr(int q) {
-
-    return getStreamVolume(q);
-    }
-    public void setVol(int q,int i, int j,int max) {
-        if(i<max) {
-            setStreamVolume(q,i,j);
-        }
-    }
     
     private void sendSMS(String phoneNumber, String message)
-    {        
-        String SENT = "SMS_SENT";
-        String DELIVERED = "SMS_DELIVERED";
- 
-        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0,
-            new Intent(SENT), 0);
- 
-        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0,
-            new Intent(DELIVERED), 0);
- 
-        //---when the SMS has been sent---
-        registerReceiver(new BroadcastReceiver(){
-            @Override
-            public void onReceive(Context arg0, Intent arg1) {
-                switch (getResultCode())
-                {
-                    case Activity.RESULT_OK:
-                        Toast.makeText(getBaseContext(), "SMS sent", 
-                                Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                        Toast.makeText(getBaseContext(), "Generic failure", 
-                                Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_NO_SERVICE:
-                        Toast.makeText(getBaseContext(), "No service", 
-                                Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_NULL_PDU:
-                        Toast.makeText(getBaseContext(), "Null PDU", 
-                                Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmsManager.RESULT_ERROR_RADIO_OFF:
-                        Toast.makeText(getBaseContext(), "Radio off", 
-                                Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        }, new IntentFilter(SENT));
- 
-        registerReceiver(new BroadcastReceiver(){
-            @Override
-            public void onReceive(Context arg0, Intent arg1) {
-                switch (getResultCode())
-                {
-                    case Activity.RESULT_OK:
-                        Toast.makeText(getBaseContext(), "SMS delivered", 
-                                Toast.LENGTH_SHORT).show();
-                        break;
-                    case Activity.RESULT_CANCELED:
-                        Toast.makeText(getBaseContext(), "SMS not delivered", 
-                                Toast.LENGTH_SHORT).show();
-                        break;                        
-                }
-            }
-        }, new IntentFilter(DELIVERED));        
- 
+    {
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);        
+        sms.sendTextMessage(phoneNumber, null, message, null, null);
     }
+
+
+
 
 }

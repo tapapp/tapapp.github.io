@@ -1,36 +1,62 @@
 package com.ram.tapdetector;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.provider.Telephony;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.View;
+import android.view.Window;
+import android.widget.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public class TapDetectorActivity extends Activity implements SensorEventListener {
 
     // App State
-    private boolean appStarted;
+    private int appMode;
+
+    // App Switcher
+    private static final int MAX_TASKS = 50;
+
+    // Call
+    private CallManager manager;
 
     // UI Elements
     private TextView tv;
 
+    // Music
+    Functions_Library functions_library;
+    private boolean musicShuffle;
+
     // Bluetooth
     private BluetoothAdapter mBluetoothAdapter;
     private ArrayAdapter mArrayAdapter;
-
-    // Request Code
-    private static final int REQUEST_ENABLE_BT = 3;
+    private BluetoothDevice mDevice;
+    private static final UUID MY_UUID = UUID.fromString("09D215E0-C32B-11E3-9C1A-0800200C9A66");
+    private ConnectedThread cThread;
 
     // Sensors
     private SensorManager mSensorManager;
@@ -41,8 +67,9 @@ public class TapDetectorActivity extends Activity implements SensorEventListener
     private float[] acceleration;
     private int[] currentWindow;
 
-    // Sensor Threshold Value
-    private static final float THRESHOLD = 0.75f;
+    // Sensor Threshold Values
+    private static final float THRESHOLD_LOW = 0.5f;
+    private static final float THRESHOLD_MID = 0.7f;
 
     // Sensor Counters
     private boolean initOver;
@@ -54,22 +81,86 @@ public class TapDetectorActivity extends Activity implements SensorEventListener
 
         super.onCreate(savedInstanceState);
 
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.main);
 
-        appStarted = false;
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+            appMode = bundle.getInt("Mode");
+        else
+            appMode = Mode.APP_SWITCHER;
 
-        // Initialize Bluetooth
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "Bluetooth is not available", Toast.LENGTH_LONG).show();
-            finish();
+        if (appMode == Mode.MUSIC) {
+            musicShuffle = false;
+            if (bundle.getBoolean("Shuffle"))
+                musicShuffle = true;
+
+            initApp();
+
+        }
+
+        if (appMode == Mode.APP_SWITCHER) {
+            initApp();
+        }
+
+        if (appMode == Mode.REJECT_CALLS) {
+            initApp();
+        }
+
+        if (appMode == Mode.BLUETOOTH_VIBRATION) {
+
+            String address = bundle.getString("Address");
+
+            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+            Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+            ArrayList<BluetoothDevice> pairedDevicesList = new ArrayList<BluetoothDevice>(pairedDevices);
+
+            for (BluetoothDevice device : pairedDevicesList) {
+                if (device.getAddress().equals(address)) {
+                    mDevice = device;
+                    initApp();
+                }
+            }
+
         }
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (functions_library != null)
+            functions_library.p();
+
+        super.onBackPressed();
+    }
+
     public void initApp() {
 
-        appStarted = true;
+        if (appMode == Mode.REJECT_CALLS) {
+
+            manager = new CallManager();
+
+        }
+
+        if (appMode == Mode.MUSIC) {
+            // Start Music
+            SongList songs = new SongList();
+            functions_library = new Functions_Library(songs.getSongs());
+            if (musicShuffle)
+                functions_library.changeShuffle();
+            functions_library.playSong(0);
+        }
+
+        if (appMode == Mode.BLUETOOTH_VIBRATION) {
+
+            // Connect Bluetooth
+            ConnectThread thread = new ConnectThread(mDevice);
+            thread.run();
+
+        }
 
         // Initialize Data
         gravity = new float[3];
@@ -82,10 +173,6 @@ public class TapDetectorActivity extends Activity implements SensorEventListener
         initOver = false;
         numSpikes = 0;
 
-        // Initialize UI
-        tv = (TextView) findViewById(R.id.textView);
-        tv.setText("Spike "+numSpikes);
-
         // Initialize Sensor
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -93,54 +180,196 @@ public class TapDetectorActivity extends Activity implements SensorEventListener
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    private class ConnectThread extends Thread {
+        private final BluetoothSocket mmSocket;
+        private final BluetoothDevice mmDevice;
 
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        } else {
+        public ConnectThread(BluetoothDevice device) {
+            BluetoothSocket tmp = null;
+            mmDevice = device;
 
-            Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-            mArrayAdapter = new ArrayAdapter();
-            if (pairedDevices.size() > 0) {
-                for (BluetoothDevice device : pairedDevices) {
-                    mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-                    Log.i("Device: ",device.getName());
+            try {
+                tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
+            } catch (IOException e) { }
+            mmSocket = tmp;
+        }
+
+        public void run() {
+
+            mBluetoothAdapter.cancelDiscovery();
+
+            try {
+                mmSocket.connect();
+                cThread = new ConnectedThread(mmSocket);
+            } catch (IOException connectException) {
+                try {
+                    mmSocket.close();
+                } catch (IOException closeException) { }
+                return;
+            }
+        }
+
+        public void cancel() {
+            try {
+                mmSocket.close();
+            } catch (IOException e) { }
+        }
+    }
+
+    private class ConnectedThread extends Thread {
+        private final BluetoothSocket mmSocket;
+        private final InputStream mmInStream;
+        private final OutputStream mmOutStream;
+
+        public ConnectedThread(BluetoothSocket socket) {
+            mmSocket = socket;
+            InputStream tmpIn = null;
+            OutputStream tmpOut = null;
+
+            try {
+                tmpIn = socket.getInputStream();
+                tmpOut = socket.getOutputStream();
+            } catch (IOException e) { }
+
+            mmInStream = tmpIn;
+            mmOutStream = tmpOut;
+        }
+
+        public void run() {
+            byte[] buffer = new byte[1024];
+            int bytes;
+
+            while (true) {
+                try {
+
+                    bytes = mmInStream.read(buffer);
+
+                    String read = new String(buffer,"UTF-8");
+                    if (read.equals("1")) {
+                        Vibrator v = (Vibrator) TapDetectorActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(500);
+                    }
+
+                } catch (IOException e) {
+                    break;
                 }
             }
+        }
+
+        public void write(byte[] bytes) {
+            try {
+                mmOutStream.write(bytes);
+            } catch (IOException e) { }
+        }
+
+        public void cancel() {
+            try {
+                mmSocket.close();
+            } catch (IOException e) { }
+        }
+    }
+
+    public void changeApp(ComponentName newComponent) {
+
+        Intent intent = getPackageManager().getLaunchIntentForPackage(newComponent.getPackageName());
+        startActivity(intent);
+
+    }
+
+    public void next() {
+
+        ActivityManager am = (ActivityManager) this.getSystemService(Activity.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(MAX_TASKS);
+
+        ArrayList<String> classNames = new ArrayList<String>();
+        for (ActivityManager.RunningTaskInfo task : tasks) {
+            classNames.add(task.topActivity.getClassName());
+        }
+
+        ComponentName currentComponent = am.getRunningTasks(1).get(0).topActivity;
+
+        String currentClassName = currentComponent.getClassName();
+
+        int index = classNames.indexOf(currentClassName);
+
+        ArrayList<Integer> taskListRemovers = new ArrayList<Integer>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            String className = tasks.get(i).topActivity.getClassName();
+            if (className.startsWith("com.android.systemui") || className.startsWith("com.android.launcher")) {
+                if (!className.equals(currentClassName)) {
+                    classNames.remove(className);
+                    taskListRemovers.add(i);
+                }
+            }
+        }
+
+        for (int i = 0; i < taskListRemovers.size(); i++) {
+            tasks.remove((int) taskListRemovers.get(i)-i);
+        }
+
+        if (index < 0)
+            return;
+
+        if(index+1 < classNames.size())
+        {
+
+            ComponentName newComponent = null;
+
+            newComponent = tasks.get(index+1).topActivity;
+
+            if (newComponent != null)
+                changeApp(newComponent);
 
         }
 
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (appStarted)
-            mSensorManager.unregisterListener(this);
-    }
+    public void previous() {
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (appStarted)
-            mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-    }
+        ActivityManager am = (ActivityManager) this.getSystemService(Activity.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(MAX_TASKS);
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ArrayList<String> classNames = new ArrayList<String>();
+        for (ActivityManager.RunningTaskInfo task : tasks) {
+            classNames.add(task.topActivity.getClassName());
+        }
 
-        if (requestCode == REQUEST_ENABLE_BT) {
+        ComponentName currentComponent = am.getRunningTasks(1).get(0).topActivity;
 
-                if (resultCode == Activity.RESULT_OK) {
-                    // Bluetooth Enabled
-                    initApp();
-                } else {
-                    // Bluetooth Not Enabled
-                    Toast.makeText(this, "App Requires Bluetooth", Toast.LENGTH_SHORT).show();
-                    finish();
+        String currentClassName = currentComponent.getClassName();
+
+        int index = classNames.indexOf(currentClassName);
+
+        ArrayList<Integer> taskListRemovers = new ArrayList<Integer>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            String className = tasks.get(i).topActivity.getClassName();
+            if (className.startsWith("com.android.systemui") || className.startsWith("com.android.launcher")) {
+                if (!className.equals(currentClassName)) {
+                    classNames.remove(className);
+                    taskListRemovers.add(i);
                 }
+            }
+        }
+
+        for (int i = 0; i < taskListRemovers.size(); i++) {
+            tasks.remove((int) taskListRemovers.get(i)-i);
+        }
+
+        if (index < 0)
+            return;
+
+        if(index-1 > -1)
+        {
+
+            ComponentName newComponent = null;
+
+            newComponent = tasks.get(index+1).topActivity;
+
+            if (newComponent != null)
+                changeApp(newComponent);
+
         }
 
     }
@@ -168,6 +397,18 @@ public class TapDetectorActivity extends Activity implements SensorEventListener
 
     }
 
+    public boolean xRightTap() {
+        return acceleration[0] > THRESHOLD_MID && Math.abs(acceleration[1]) < THRESHOLD_LOW && Math.abs(acceleration[2]) < THRESHOLD_LOW;
+    }
+
+    public boolean xLeftTap() {
+        return acceleration[0] > THRESHOLD_MID && Math.abs(acceleration[1]) < THRESHOLD_LOW && Math.abs(acceleration[2]) < THRESHOLD_LOW;
+    }
+
+    public boolean zTap() {
+        return Math.abs(acceleration[0]) < THRESHOLD_LOW && Math.abs(acceleration[1]) < THRESHOLD_LOW && Math.abs(acceleration[2]) > THRESHOLD_MID;
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
 
@@ -185,25 +426,78 @@ public class TapDetectorActivity extends Activity implements SensorEventListener
             acceleration[1] = event.values[1] - gravity[1];
             acceleration[2] = event.values[2] - gravity[2];
 
+            //Log.i("acceleration",acceleration[0]+", "+acceleration[1]+", "+acceleration[2]);
+
             sensorCount++;
 
             if (sensorCount > 20)
                 initOver = true;
 
-            if (acceleration[0] < THRESHOLD && acceleration[1] < THRESHOLD && acceleration[2] > THRESHOLD && initOver){
+            if (appMode == Mode.REJECT_CALLS || appMode == Mode.BLUETOOTH_VIBRATION) {
 
-                translateWindow(1);
+                if (zTap() && initOver) {
 
-                if (countSpikes(currentWindow) == 1) {
+                    translateWindow(1);
 
-                    numSpikes++;
-                    Log.i("Spike ",""+numSpikes);
-                    tv.setText("Spike " + numSpikes);
+                    if (countSpikes(currentWindow) == 1) {
 
+                        Log.i("Tap","Z-TAP");
+
+                        if (appMode == Mode.REJECT_CALLS) {
+                            manager.tapped();
+                        }
+
+                        if (appMode == Mode.BLUETOOTH_VIBRATION) {
+                            cThread.write("1".getBytes());
+                        }
+
+                    }
+
+
+                } else if (initOver) {
+                    translateWindow(0);
                 }
 
-            } else if (initOver)
-                translateWindow(0);
+            }
+
+            if (appMode == Mode.APP_SWITCHER || appMode == Mode.MUSIC) {
+
+                if (xRightTap() && initOver) {
+
+                    translateWindow(1);
+
+                    if (countSpikes(currentWindow) == 1) {
+
+                        if (appMode == Mode.APP_SWITCHER) {
+                            Log.i("Tap","Right Tap");
+                            next();
+                        }
+
+                        if (appMode == Mode.MUSIC)
+                            functions_library.skip();
+
+                    }
+
+                } else if (xLeftTap()) {
+
+                    translateWindow(1);
+
+                    if (countSpikes(currentWindow) == 1) {
+
+                        if (appMode == Mode.APP_SWITCHER) {
+                            Log.i("Tap","Left Tap");
+                            previous();
+                        }
+
+                        if (appMode == Mode.MUSIC)
+                            functions_library.back();
+
+                    }
+
+                } else if (initOver)
+                    translateWindow(0);
+
+            }
 
         }
 

@@ -2,10 +2,11 @@
 <shape
         xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke
-            android:width="5dp"
-            android:color="#1bb0f9"/>
+            android:width="3dp"
+            android:color="#1bb0f9">
+    </stroke>
     <padding
-            android:left="1dp"
+            android:left="0dp"
             android:right="1dp"
             android:top="1dp"
             android:bottom="1dp"/>

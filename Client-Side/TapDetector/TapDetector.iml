@@ -2,11 +2,7 @@
 <module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android" name="Android">
-      <configuration>
-        <proGuardCfgFiles>
-          <file>file://%MODULE_SDK_HOME% 2/tools/proguard/proguard-android.txt</file>
-        </proGuardCfgFiles>
-      </configuration>
+      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
