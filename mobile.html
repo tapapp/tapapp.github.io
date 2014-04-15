@@ -5,16 +5,45 @@
             <title>Tap App</title>
 
             <link rel="stylesheet" href="css/flatui.css"/>
+            <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
             <script src="js/jquerymobile.js"></script>
     </head>
 
     <body>
-        <div data-role="page">
+        <div data-role="page" id="home">
             <div data-role="content">
-                <div align="center"><img src="images/tap_web_banner.png"/></div>
+                <div align="center"><img src="images/tap_web_banner.png"></div>
             </div>
-            <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-                  <h1></h1>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed" data-tap-toggle="false">
+                <ul>
+                    <li><a href="#" data-icon="home" data-theme="f">Home</a></li>
+                    <li><a href="#download" data-icon="star" data-theme="f">Download</a></li>
+                    <li><a href="#features" data-icon="grid" data-theme="f">Features</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="page" id="download">
+            <div data-role="content">
+                <div align="center"><img src="images/tap_web_banner.png"></div>
+            </div>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed" data-tap-toggle="false">
+                <ul>
+                    <li><a href="#home" data-icon="home" data-theme="f">Home</a></li>
+                    <li><a href="#" data-icon="star" data-theme="f">Download</a></li>
+                    <li><a href="#features" data-icon="grid" data-theme="f">Features</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="page" id="features">
+            <div data-role="content">
+                <div align="center"><img src="images/tap_web_banner.png"></div>
+            </div>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed" data-tap-toggle="false">
+                <ul>
+                    <li><a href="#home" data-icon="home" data-theme="f">Home</a></li>
+                    <li><a href="#download" data-icon="star" data-theme="f">Download</a></li>
+                    <li><a href="#" data-icon="grid" data-theme="f">Features</a></li>
+                </ul>
             </div>
         </div>
     </body>
