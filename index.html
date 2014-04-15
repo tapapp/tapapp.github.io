@@ -19,11 +19,11 @@
 	<link rel="stylesheet" href="css/skeleton.css">
 	<link rel="stylesheet" href="css/layout.css">
     <script type="text/javascript">
-        console.log('here');
+
         detectmob();
         
         function detectmob() { 
-            console.log('heredude');
+
              if( navigator.userAgent.match(/Android/i)
              || navigator.userAgent.match(/webOS/i)
              || navigator.userAgent.match(/iPhone/i)
@@ -32,10 +32,11 @@
              || navigator.userAgent.match(/BlackBerry/i)
              || navigator.userAgent.match(/Windows Phone/i)
              ){
-                alert('true');
+                console.log('mobile');
+                window.location.replace("http://tapapp.github.io/mobile.html");
               }
              else {
-                alert('false');
+                console.log('web');
               }
         }
 
