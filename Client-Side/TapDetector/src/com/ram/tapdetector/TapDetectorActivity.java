@@ -148,7 +148,7 @@ public class TapDetectorActivity extends Activity implements SensorEventListener
         if (appMode == Mode.MUSIC) {
             // Start Music
             SongList songs = new SongList();
-            functions_library = new Functions_Library(songs.getSongs());
+            functions_library = new Functions_Library(songs.getSongs(),this);
             if (musicShuffle)
                 functions_library.changeShuffle();
             functions_library.playSong(0);
@@ -195,7 +195,7 @@ public class TapDetectorActivity extends Activity implements SensorEventListener
         }
 
         public void run() {
-
+                functions_library.outputCheck();
             mBluetoothAdapter.cancelDiscovery();
 
             try {

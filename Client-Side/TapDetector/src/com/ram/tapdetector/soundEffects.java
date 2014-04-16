@@ -1,6 +1,8 @@
 package com.ram.tapdetector;
 
-public class soundEffects {
+import android.media.AudioManager;
+
+public class soundEffects  {
 
     public soundEffects()
     {

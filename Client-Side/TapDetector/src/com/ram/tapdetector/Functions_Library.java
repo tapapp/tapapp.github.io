@@ -20,36 +20,79 @@ import java.util.HashMap;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import android.media.AudioManager.OnAudioFocusChangeListener;
+import android.media.AudioManager;
 
-public class Functions_Library {
+import static android.media.AudioManager.*;
+
+public class Functions_Library implements AudioManager.OnAudioFocusChangeListener {
 
     ArrayList<HashMap<String,String>> song= new  ArrayList<HashMap<String,String>>();
     ArrayList<Integer> rec= new ArrayList<Integer>();
-    public final int STREAM_MUSIC=2;
+        private double Rv,Lv=100.0;
+
+    AudioManager Audio;
     SongList songlist;
-    public final int ADJUST_RAISE=1;
-    public final int ADJUST_LOWER=1;
+Context C;
     private int index;
     private boolean crap=false;
     private boolean shuffle = true;
     MediaPlayer mediaPlayer;
 
-    public Functions_Library( ArrayList<HashMap<String,String>> s) {
+
+    public void onAudioFocusChange(int focusChange) {
+    }
+
+    public Functions_Library( ArrayList<HashMap<String,String>> s,Context c) {
+        C=c;
+        Audio =(AudioManager)C.getSystemService(Context.AUDIO_SERVICE);
+
         rec.add(5);
         song=s;
 
         mediaPlayer = new MediaPlayer();
 
     }
+    private OnAudioFocusChangeListener al = new OnAudioFocusChangeListener(){
+        public void onAudioFocusChange(int focusChange) {
+            switch(focusChange){
+                case AudioManager.AUDIOFOCUS_LOSS:
+                    p();
+                    break;
+
+                case AudioManager.AUDIOFOCUS_GAIN: {
+                    playSong(index);
+                    Rv=Rv*10;
+                    Lv=Lv*10;
+                    mediaPlayer.setVolume((float)Rv,(float) Lv);
+                }
+                    break;
+                case AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK: {
+                    Rv = Rv / 10;
+                    Lv = Lv / 10;
+                    mediaPlayer.setVolume((float) Rv, (float) Lv);
+                }
+                    break;
+
+
+            }
+        }
+    };
+
     public void playSong(int songIndex)  {
 
-        index=songIndex;
+        int result;
+        result = Audio.requestAudioFocus(al,STREAM_MUSIC, AUDIOFOCUS_GAIN);
+
+        if (result == AUDIOFOCUS_REQUEST_GRANTED) {
+
+            index = songIndex;
             try {
                 mediaPlayer.reset();
                 mediaPlayer.setDataSource(song.get(songIndex).get("path"));
                 mediaPlayer.prepare();
                 mediaPlayer.start();
-                mediaPlayer.setVolume(100.0f,10.0f);
+                mediaPlayer.setVolume((float)Rv,(float) Lv);
 
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
@@ -58,7 +101,12 @@ public class Functions_Library {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else
+        {
 
+            stop();
+        }
     }
 
 
@@ -106,7 +154,29 @@ public class Functions_Library {
         }
 
     }
-
+    public void bluetooth(boolean s)
+    {
+        if(s)
+        Audio.startBluetoothSco();
+        else
+            Audio.stopBluetoothSco();
+    }
+    public void outputCheck()
+    {
+        if (Audio.isBluetoothA2dpOn()) {
+               Rv= Rv*10;
+                  Lv=Lv*10;
+            Audio.setBluetoothScoOn(true);
+        } else if (Audio.isSpeakerphoneOn()) {
+            Rv= Rv*5;
+            Lv=Lv*5;
+        } else if (Audio.isWiredHeadsetOn()) {
+            Rv= Rv*2;
+            Lv=Lv*2;
+        }
+      // Bluetooth  bluetooth(Audio.isBluetoothA2dpOn());
+        mediaPlayer.setVolume((float)Rv,(float) Lv);
+    }
     public boolean Playing()
     {
         return mediaPlayer.isPlaying();
