@@ -47,7 +47,7 @@ body {
 }
 
 .sidebar-nav li {
-  line-height: 40px;
+  line-height: 62px;
   text-indent: 20px;
 }
 
@@ -116,6 +116,21 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.main-header {
+  position: absolute;    
+  text-align: left;
+  background-color: Black;    
+  z-index: 2;
+}
+
+.main-footer {
+  background:green;
+  width:500px;
+  height:100px; 
+  margin-top:100px;
+  z-index: 3;
 }
 
 /* Intro */
@@ -222,7 +237,7 @@ i.scroll:hover {
 @media (max-width: 768px) {
 	
   .header {
-	background: url(../img/bg.jpg) no-repeat center center scroll; 
+	background: url(../img/mainbg.jpg) no-repeat center center scroll; 
   }
 
   .callout {
