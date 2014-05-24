@@ -38,9 +38,10 @@ function searchVideos() {
     console.log(results);
     alert(results);
     //parseResults();
-        $.each(results.items, function(item) {
-        alert(item.id.videoId);
-    });  
+      /*  $.each(results.items, function(item) {
+        alert(result);
+    });  */
+    alert(results.items);
 }
 
 function setChill() {
