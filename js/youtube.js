@@ -35,8 +35,8 @@ function searchVideos() {
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send( null );
     results = xmlHttp.responseText;
-    
-   //parseResults();
+    alert(results);
+   parseResults();
 }
 
 function setChill() {
@@ -60,11 +60,11 @@ function setWorkout() {
     searchVideos();
 }
 
-/*function parseResults() {
+function parseResults() {
     for (int i = 0; i<results.length; i++)
     {
         
     }
     
     
-}*/
+}
