@@ -1,3 +1,8 @@
+var script = document.createElement('script');
+script.src = 'js/jquery.js';
+script.type = 'text/javascript';
+document.getElementsByTagName('head')[0].appendChild(script);
+
 var search;
 var category = "music";
 var vidURL;
@@ -36,8 +41,7 @@ function searchVideos() {
     xmlHttp.send( null );
     results = xmlHttp.responseText;
     //alert(results);
-   console.log(results.items.id.videoId);
-        parseResults();
+    parseResults();
 }
 
 function setChill() {
@@ -62,7 +66,10 @@ function setWorkout() {
 }
 
 function parseResults() {
-    console.log(results[items].length);
+    $.each(results, function(i, results.items) {
+        alert(i);
+    });
+
   /*  for (int i = 0; i<results.length; i++)
     {
         
