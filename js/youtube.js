@@ -26,7 +26,7 @@ var results;
 
 function searchVideos() {
     
-    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyCCOCeF8ocaBzA6YkelhT9_ZMLzxlEu9k4";
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyAtw8iyBHIKBTLzIH9SdAi0LpHw7IKQjjw";
     var xmlHttp = null;
 
     xmlHttp = new XMLHttpRequest();
