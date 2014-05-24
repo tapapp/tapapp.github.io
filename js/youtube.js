@@ -44,7 +44,9 @@ function setSearch() {
 }
 
 function parseResults() {
-
+    
+    videoIDs = [];
+    
     $.each(results.items, function(item) {
         videoIDs.push(results.items[item].id.videoId);
     });  
