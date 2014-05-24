@@ -4,7 +4,7 @@ var vidURL;
 var results;
 //http://www.youtube.com/v/VIDEO_ID?version=3&enablejsapi=1
 
-function searchVideos() {
+/*function searchVideos() {
 
     gapi.client.load('youtube', 'v3', function() {
         console.log('youtube API loaded...');
@@ -22,4 +22,16 @@ function searchVideos() {
             alert(str);
         });
     });
+}*/
+
+function searchVideos() {
+    
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=term&key={YOUR_API_KEY}";
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", searchURL, false );
+    xmlHttp.send( null );
+    alert(xmlHttp.responseText);
+    
 }
