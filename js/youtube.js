@@ -33,4 +33,6 @@ function searchVideos(searchTerm) {
     xmlHttp.send( null );
     results = xmlHttp.responseText;
     
+    alert(results);
+    
 }
