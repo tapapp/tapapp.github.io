@@ -14,6 +14,8 @@ function searchVideos() {
             q: search
         });
         alert(request);
+        var str = JSON.stringify(request);
+        alert(str);
         request.execute(function(response) {
 
             var str = JSON.stringify(response.result);
