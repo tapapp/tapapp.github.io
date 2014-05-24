@@ -2,6 +2,8 @@ var search;
 var category = "music";
 var vidURL;
 var results;
+
+var videoIDs = [];
 //http://www.youtube.com/v/VIDEO_ID?version=3&enablejsapi=1
 
 /*function searchVideos() {
