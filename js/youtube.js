@@ -36,12 +36,12 @@ function searchVideos() {
     xmlHttp.send( null );
     results = xmlHttp.responseText;
     console.log(results);
-    alert(results);
+    //alert(results);
     //parseResults();
       /*  $.each(results.items, function(item) {
         alert(result);
     });  */
-    alert(results.items);
+    //alert(results.items);
 }
 
 function setChill() {
