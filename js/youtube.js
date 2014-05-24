@@ -35,6 +35,7 @@ function searchVideos() {
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send( null );
     results = xmlHttp.responseText;
+    console.log(results);
     alert(results);
     parseResults();
 }
