@@ -61,9 +61,9 @@ function setWorkout() {
 }
 
 function parseResults() {
-    $.each(results, function(i, results) {
-        alert(i);
-    });
+  /*  $.each(results.items, function(i, item) {
+        alert(items[i].);
+    });*/
 
   /*  for (int i = 0; i<results.length; i++)
     {
