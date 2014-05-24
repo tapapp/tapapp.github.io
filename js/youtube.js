@@ -10,9 +10,10 @@ function searchVideos() {
         console.log('youtube API loaded...');
 
         var request = gapi.client.youtube.search.list({
-            part: 'snippt',
+            part: 'snippet',
             q: search
         });
+        alert(request);
         request.execute(function(response) {
 
             var str = JSON.stringify(response.result);
