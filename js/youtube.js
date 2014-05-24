@@ -61,7 +61,7 @@ function setWorkout() {
 }
 
 function parseResults() {
-    $jquery.each(results, function(i, results.items) {
+    $.each(results, function(i, results) {
         alert(i);
     });
 
