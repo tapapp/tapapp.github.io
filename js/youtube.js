@@ -35,7 +35,7 @@ function searchVideos() {
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send( null );
     results = xmlHttp.responseText;
-    console.log(results);
+    results = $.parseJSON(results);
     //alert(results);
     //parseResults();
       /*  $.each(results.items, function(item) {
