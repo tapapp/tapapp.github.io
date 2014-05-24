@@ -36,7 +36,7 @@ function searchVideos() {
     xmlHttp.send( null );
     results = xmlHttp.responseText;
     
-   // parseResults();
+   //parseResults();
 }
 
 function setChill() {
