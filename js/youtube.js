@@ -48,4 +48,6 @@ function parseResults() {
     $.each(results.items, function(item) {
         videoIDs.push(results.items[item].id.videoId);
     });  
+    
+    window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
 }
