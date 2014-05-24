@@ -76,6 +76,6 @@ function parseResults() {
         alert(newResults.id);
     }*/
     $.each(results.items, function(item) {
-        alert(item);
+        alert(results.items[item].id.videoId);
     });  
 }
