@@ -53,5 +53,20 @@ function parseResults() {
         videoIDs.push(results.items[item].id.videoId);
     });  
     
+    shuffleArray();
+    
     window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
+}
+
+function shuffleArray() {
+    var array = videoIDs;
+    
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    videoIDs = array;
 }
