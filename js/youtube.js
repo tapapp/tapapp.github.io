@@ -53,4 +53,7 @@ function setParty() {
     search="party";
     searchVideos();
 }
-function set
+function setWorkout() {
+    search="workout";
+    searchVideos();
+}
