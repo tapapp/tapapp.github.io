@@ -41,29 +41,28 @@ function searchVideos() {
 }
 
 function setChill() {
-    search="chill";
+    search="chill music";
     searchVideos();
 }
 function setHappy() {
-    search="happy";
+    search="happy music";
     searchVideos();
 }
 function setStudying() {
-    search="studying";
+    search="studying music";
     searchVideos();
 }
 function setParty() {
-    search="party";
+    search="party music";
     searchVideos();
 }
 function setWorkout() {
-    search="workout";
+    search="workout music";
     searchVideos();
 }
 
 function parseResults() {
     $.each(results.items, function(i, item) {
         alert(items[i].id.videoId);
-    });
-    
+    });   
 }
