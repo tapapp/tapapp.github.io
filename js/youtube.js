@@ -1,3 +1,4 @@
+var search;
 var category = "music";
 var vidURL;
 var results;
@@ -23,9 +24,9 @@ var results;
     });
 }*/
 
-function searchVideos(searchTerm) {
+function searchVideos() {
     
-    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchTerm+"&key=AIzaSyAtw8iyBHIKBTLzIH9SdAi0LpHw7IKQjjw";
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyAtw8iyBHIKBTLzIH9SdAi0LpHw7IKQjjw";
     var xmlHttp = null;
 
     xmlHttp = new XMLHttpRequest();
@@ -34,5 +35,13 @@ function searchVideos(searchTerm) {
     results = xmlHttp.responseText;
     
     alert(results);
-    
+}
+
+function setChill() {
+    search="chill";
+    searchVideos();
+}
+function setHappy() {
+    search="happy";
+    searchVideos();
 }
