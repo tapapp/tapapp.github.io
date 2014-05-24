@@ -30,6 +30,7 @@ var results;
             part: 'id',
             q: qVar
         });
+        alert(request);
         // Step 6: Execute the API request
         request.execute(function(resp) {
           document.getElementById('vid').value = resp.items[0].id.videoId;
