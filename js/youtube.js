@@ -37,7 +37,10 @@ function searchVideos() {
     results = xmlHttp.responseText;
     console.log(results);
     alert(results);
-    parseResults();
+    //parseResults();
+        $.each(results.items, function(item) {
+        alert(item.id.videoId);
+    });  
 }
 
 function setChill() {
