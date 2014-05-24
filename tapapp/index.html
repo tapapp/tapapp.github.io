@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Tap App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+	<link href='http://fonts.googleapis.com/css?family=Crete+Round&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+  	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="css/layout.css">
+    <script type="text/javascript">
+
+        detectmob();
+        
+        function detectmob() { 
+
+             if( navigator.userAgent.match(/Android/i)
+             || navigator.userAgent.match(/webOS/i)
+             || navigator.userAgent.match(/iPhone/i)
+             || navigator.userAgent.match(/iPad/i)
+             || navigator.userAgent.match(/iPod/i)
+             || navigator.userAgent.match(/BlackBerry/i)
+             || navigator.userAgent.match(/Windows Phone/i)
+             ){
+                console.log('mobile');
+                window.location.replace("http://tapapp.github.io/mobile.html");
+              }
+             else {
+                console.log('web');
+              }
+        }
+
+    </script>
+</head>
+<body></body>
+
+	<header>			
+		<nav>
+			<div class='container'>
+				<div class='five columns logo'>
+                    <img style="width:120px;height:60px" src='images/tap_web_banner.png' />
+				</div>
+			</div>
+		</nav>
+
+		<div id='addstuff' class='container'>
+            <div class='slogan'><div class='ten columns'><h1><b>Control</b> &amp; <b>Communicate</b></h1><h2>using customizable tap gestures anywhere on the surface of the phone.</h2></div><div class='six columns'><h4>Download</h4><p>This application is now available on the Android platform!</p><a href='https://play.google.com/store/apps/details?id=com.rran.tapapp' class='button medium green'>Google Play</a></div></div>
+		</div>	
+	</header>
+
+	<div class='clear'></div>
+
+	<div class='container focus'>
+
+		<h3>Features</h3>
+        
+        <!--<div class='eight columns'>
+			<h3>Send Vibrations (coming soon)</h3>
+			<p>Using a bluetooth connection, send vibrations to another phone with Tap installed for secret and quick communication.</p>
+		</div>-->
+
+		<div class='eight columns'>
+			<h3>Change Music</h3>
+			<p>This feature allows you to pause or change the current song playing while the phone is in your pocket.</p>
+		</div>
+        
+		<!--<div class='eight columns'>
+			<h3>Reject Calls (coming soon)</h3>
+			<p>Imaging getting a phone call in the middle of an important meeting or interview. Simply tap on your phone (even while its in your pocket) to end the call.</p>
+		</div>-->
+
+		<div class='eight columns'>
+			<h3>Shuffle Through Apps</h3>
+			<p>Switch through the apps in the background by tapping the left or right of your phone.</p>
+		</div>
+    
+    </div>
+
+<!--	<div class='clear'></div>
+
+        <div class='orange'>
+    
+            <div class='container'>
+            </div>
+    
+        </div>
+    
+        <div class='container focus'>
+    
+            <h3>Upcoming Features</h3>
+    
+            <div class='eight columns'>
+                <h4>REJECT CALLS</h4>
+                <p>Imaging getting a phone call in the middle of an important meeting or interview. Simply tap on your phone (even while its in your pocket) to end the call.</p>
+            </div>
+    
+            <div class='eight columns'>
+                <h4>CALIBRATION SETTINGS</h4>
+                <p>Customize the application to your touch by calibrating the sensitivity.</p>
+            </div>
+    
+    
+            <div class='clear'></div>
+    
+    
+            <div class='eight columns'>
+                <h4>SEND VIBRATIONS</h4>
+                <p>Using a bluetooth connection, send vibrations to another phone with Tap installed for secret and quick communication.</p>
+            </div>
+    
+            <div class='eight columns'>
+                <h4>SHAKE TO WAKE</h4>
+                <p>We are looking to add a feature that will allow the user to unlock their device by shaking it.</p>
+            </div>
+    
+        </div>
+
+    <div class="clear"></div> -->
+
+	<footer>
+		<div class='container'>
+			
+			<div class='eight columns'>
+				<h5>Copyright &copy; 2014, RANN Tech.</h5>
+			</div>
+
+			<div class='four columns'>
+                <a href="http://www.hackru.org"><img align="left" style="width:80%;height:60%" src="images/hackrulogo.png"/></a>
+			</div>
+
+		<a id='top' href='#'>&uarr;</a>	
+		</div>
+	</footer>
+
+</body>
+</html>
