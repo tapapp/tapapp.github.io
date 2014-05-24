@@ -41,7 +41,8 @@ function setWorkout() {
     searchVideos();
 }
 function setSearch() {
-    //set the search variable to parameter + music
+    search = document.getElementById("search").value;
+    searchVideos();
 }
 
 function parseResults() {
@@ -53,12 +54,4 @@ function parseResults() {
     });  
     
     window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
-}
-
-function save() {
-      var number;
-      number = document.getElementById("search").value;
-
-      window.alert(number);
-
 }
