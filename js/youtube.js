@@ -28,7 +28,7 @@ var videoIDs = [];
 
 function searchVideos() {
     
-    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyAtw8iyBHIKBTLzIH9SdAi0LpHw7IKQjjw";
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk";
     var xmlHttp = null;
 
     xmlHttp = new XMLHttpRequest();
@@ -36,7 +36,7 @@ function searchVideos() {
     xmlHttp.send( null );
     results = xmlHttp.responseText;
     
-    alert(results);
+    parseResults();
 }
 
 function setChill() {
@@ -59,3 +59,12 @@ function setWorkout() {
     search="workout";
     searchVideos();
 }
+
+/*function parseResults() {
+    for (int i = 0; i<results.length; i++)
+    {
+        
+    }
+    
+    
+}*/
