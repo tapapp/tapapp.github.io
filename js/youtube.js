@@ -23,7 +23,7 @@ var results;
     });
 }*/
 
-function searchVideos(searchTerm) {
+function searchVideos(var searchTerm) {
     
     var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchTerm+"&key=AIzaSyAtw8iyBHIKBTLzIH9SdAi0LpHw7IKQjjw";
     var xmlHttp = null;
