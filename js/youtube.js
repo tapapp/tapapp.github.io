@@ -70,7 +70,12 @@ function setSearch() {
 
 function parseResults() {
     alert(results.items);
-    $.each(results.items, function(item) {
+    var newResults = jQuery.parseJSON(results.items);
+    for(int i=0; i<newResults.length; i++)
+    {
+        alert(newResults.id.videoId);
+    }
+    /*$.each(results.items, function(item) {
         alert(item.id.videoId);
-    });   
+    }); */  
 }
