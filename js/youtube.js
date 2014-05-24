@@ -61,9 +61,9 @@ function setWorkout() {
 }
 
 function parseResults() {
-  /*  $.each(results.items, function(i, item) {
-        alert(items[i].);
-    });*/
+    $.each(results.items, function(i, item) {
+        alert(items[i].id.videoId);
+    });
 
   /*  for (int i = 0; i<results.length; i++)
     {
