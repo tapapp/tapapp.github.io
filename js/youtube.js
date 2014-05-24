@@ -4,7 +4,7 @@ var vidURL;
 var results;
 //http://www.youtube.com/v/VIDEO_ID?version=3&enablejsapi=1
 
-/*function searchVideos() {
+function searchVideos() {
   var q = search;
   var request = gapi.client.youtube.search.list({
     q: q,
@@ -16,9 +16,9 @@ var results;
   });
     
     alert(results);
-}*/
+}
 
- function searchVideos() {
+/* function searchVideos() {
 
     gapi.client.load('youtube', 'v3', function() {
         console.log('youtube API loaded...');
@@ -33,10 +33,10 @@ var results;
         
         var str = JSON.stringify(request);
         alert(str);
-        // Step 6: Execute the API request
-        request.execute(function(resp) {
+
+        /*request.execute(function(resp) {
           document.getElementById('vid').value = resp.items[0].id.videoId;
           console.log('saved video id successfully');
         });
       });
-  }
+  }/*
