@@ -10,12 +10,12 @@ function searchVideos() {
         console.log('youtube API loaded...');
 
         var request = gapi.client.youtube.search.list({
-            type: 'video',
             part: 'snippt',
             q: search
         });
-        
-        var str = JSON.stringify(request);
-        alert(str);
-      });
+        request.execute(function(response) {
+
+            var str = JSON.stringify(response.result);
+            alert(str);
+        });
 }
