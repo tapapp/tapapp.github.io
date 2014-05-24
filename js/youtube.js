@@ -32,7 +32,7 @@ var results;
         });
         // Step 6: Execute the API request
         request.execute(function(resp) {
-          document.getElementById('vid').value = resp.items[1].id.videoId;
+          document.getElementById('vid').value = resp.items[0].id.videoId;
           console.log('saved video id successfully');
         });
       });
