@@ -73,7 +73,7 @@ function parseResults() {
     var newResults = jQuery.parseJSON(results.items);
     for(int i=0; i<newResults.length; i++)
     {
-        alert(newResults.id.videoId);
+        alert(newResults.id);
     }
     /*$.each(results.items, function(item) {
         alert(item.id.videoId);
