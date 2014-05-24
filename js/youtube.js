@@ -69,6 +69,7 @@ function setSearch() {
 }
 
 function parseResults() {
+    alert(results.items);
     $.each(results.items, function(item) {
         alert(item.id.videoId);
     });   
