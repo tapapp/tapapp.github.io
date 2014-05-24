@@ -30,7 +30,9 @@ var results;
             part: 'id',
             q: qVar
         });
-        alert(request);
+        
+        var str = JSON.stringify(response.result);
+        alert(str);
         // Step 6: Execute the API request
         request.execute(function(resp) {
           document.getElementById('vid').value = resp.items[0].id.videoId;
