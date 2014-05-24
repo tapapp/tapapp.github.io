@@ -45,3 +45,12 @@ function setHappy() {
     search="happy";
     searchVideos();
 }
+function setStudying() {
+    search="studying";
+    searchVideos();
+}
+function setParty() {
+    search="party";
+    searchVideos();
+}
+function set
