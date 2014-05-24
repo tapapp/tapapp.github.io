@@ -60,9 +60,12 @@ function setWorkout() {
     search="workout music";
     searchVideos();
 }
+function setSearch() {
+    //set the search variable to parameter + music
+}
 
 function parseResults() {
-    $.each(results.items, function(i, item) {
-        alert(items[i].id.videoId);
+    $.each(results.items, function(item) {
+        alert(item.id.videoId);
     });   
 }
