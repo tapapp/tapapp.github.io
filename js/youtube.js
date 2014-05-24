@@ -31,7 +31,7 @@ var results;
             q: qVar
         });
         
-        var str = JSON.stringify(response.result);
+        var str = JSON.stringify(request);
         alert(str);
         // Step 6: Execute the API request
         request.execute(function(resp) {
