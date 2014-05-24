@@ -1,4 +1,3 @@
-var search = "party";
 var category = "music";
 var vidURL;
 var results;
@@ -24,14 +23,14 @@ var results;
     });
 }*/
 
-function searchVideos() {
+function searchVideos(searchTerm) {
     
-    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyAtw8iyBHIKBTLzIH9SdAi0LpHw7IKQjjw";
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchTerm+"&key=AIzaSyAtw8iyBHIKBTLzIH9SdAi0LpHw7IKQjjw";
     var xmlHttp = null;
 
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send( null );
-    alert(xmlHttp.responseText);
+    results = xmlHttp.responseText;
     
 }
