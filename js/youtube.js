@@ -14,10 +14,8 @@ function searchVideos() {
         var str = JSON.stringify(response.result);
         results = str;
   });
-    
     alert(results);
 }
-
 /* function searchVideos() {
 
     gapi.client.load('youtube', 'v3', function() {
