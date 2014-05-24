@@ -62,7 +62,6 @@ function setWorkout() {
 }
 
 function parseResults() {
-    alert("4");
     alert(results.items.length);
   /*  for (int i = 0; i<results.length; i++)
     {
