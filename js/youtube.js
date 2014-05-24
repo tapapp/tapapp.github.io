@@ -76,6 +76,6 @@ function parseResults() {
         alert(newResults.id);
     }*/
     $.each(results.items, function(item) {
-        alert(jQuery.parseJSON(item.id));
+        alert(item);
     });  
 }
