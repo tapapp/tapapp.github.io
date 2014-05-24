@@ -18,4 +18,5 @@ function searchVideos() {
             var str = JSON.stringify(response.result);
             alert(str);
         });
+    });
 }
