@@ -58,29 +58,7 @@ function parseResults() {
     var duration;
     alert(results.items[0].id.videoId);
     alert(results.items[1].id.videoId);
-    /*$.each(results.items, function(item) {
-        if(results.items[item].id.videoId != undefined && results.items[item].id.videoId != null)
-        {
-                searchURL = "https://gdata.youtube.com/feeds/api/videos/"+results.items[item].id.videoId+"?v=1";
-                xmlHttp = null;
-            
-                xmlHttp = new XMLHttpRequest();
-                xmlHttp.open( "GET", searchURL, false );
-                xmlHttp.send();
-                results = xmlHttp.responseText;
-            
-                splits = results.split("duration='");
-                splits.splice(0, 1);
-                results = splits[0];
-                loc = results.indexOf("'");
-                duration = results.substring(0,loc);
-                alert(duration);
-                if (duration < 500) {
-                    videoIDs.push(results.items[item].id.videoId);
-                    
-                }          
-        }
-    });  */
+    
     alert(results.items.length);
     
     alert(videoIDs);
