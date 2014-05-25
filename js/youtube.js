@@ -127,7 +127,7 @@ function pause() {
     player.pauseVideo();
 }
 
-function onPlayerStateChance() {
+function onPlayerStateChange(event) {
     
 }
 
