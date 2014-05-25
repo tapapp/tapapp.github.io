@@ -60,7 +60,7 @@ function parseResults() {
     
     shuffleArray();
     
-    window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
+    //window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
     
     /*var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
     
@@ -104,8 +104,8 @@ function embedVideo() {
     currentIndex = 0;
     currentVideo = videoIDs[currentIndex];
     
-    
-    $('#videoplayer').append('http://www.youtube.com/watch?v='+videoIDs[0]+'&controls=0&autoplay=1&autohide=1&color=white');
+    $('#videoplayer').append( "<iframe width='560' height='310' src='http://www.youtube.com/embed/'"+videoIDs[0]+"'?&fs=0&controls=0&autohide=1&color=white&autoplay=1&version=3&enablejsapi=1' frameborder="0" ></iframe>'");
+                        
 }
 
 function pause() {
