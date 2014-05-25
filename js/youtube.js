@@ -69,7 +69,7 @@ function parseResults() {
     xmlHttp.send( null );
     results = xmlHttp.responseText;
     console.log(results);
-    results = $.parseJSON(results);
+
     
 }
 
