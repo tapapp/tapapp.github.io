@@ -22,11 +22,8 @@ function searchVideos() {
 }
 
 function setChill() {
-    for(int i=0; i< 3; i++)
-    {
-        search="chill music";
-        searchVideos();
-    }
+    search="chill music";
+    searchVideos();
 }
 function setHappy() {
     search="happy music";
