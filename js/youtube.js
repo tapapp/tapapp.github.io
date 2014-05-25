@@ -109,6 +109,21 @@ function embedVideo() {
     
 }
 
+var player;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('idank', {
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+function pause() {
+    player.pauseVideo();
+}
+
 
 function nextSong() {
     currentIndex++;
