@@ -44,7 +44,7 @@ function setWorkout() {
     searchVideos();
 }
 function setSearch() {
-    search = document.getElementById("search").value;
+    search = document.getElementById("search").value + " music";
     alert(search);
     searchVideos();
 }
