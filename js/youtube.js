@@ -5,8 +5,6 @@ var currentVideo;
 var currentIndex;
 var videoIDs, ctags, htags, stags, ptags, wtags = [];
 
-ctags = ["chill", "football", "gambino"];
-
 function searchVideos() {
 
     var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&maxResults=50";
@@ -52,7 +50,7 @@ function setChill() {
     videoIDs = [];
     shufflectags();
 
-    for(var i=0;i<3;i++) {    
+    for(var i=0;i<5;i++) {    
         search = ctags[i]+ " music";
         searchVideosMoods();
     }
@@ -65,7 +63,7 @@ function setHappy() {
     videoIDs = [];
     shufflehtags();
 
-    for(var i=0;i<3;i++) {    
+    for(var i=0;i<5;i++) {    
         search = htags[i]+ " music";
         searchVideosMoods();
     }
@@ -77,7 +75,7 @@ function setStudying() {
     videoIDs = [];
     shufflestags();
 
-    for(var i=0;i<3;i++) {    
+    for(var i=0;i<5;i++) {    
         search = stags[i]+ " music";
         searchVideosMoods();
     }
@@ -89,7 +87,7 @@ function setParty() {
     videoIDs = [];
     shuffleptags();
 
-    for(var i=0;i<3;i++) {    
+    for(var i=0;i<5;i++) {    
         search = ptags[i]+ " music";
         searchVideosMoods();
     }
@@ -101,7 +99,7 @@ function setWorkout() {
     videoIDs = [];
     shufflewtags();
 
-    for(var i=0;i<3;i++) {    
+    for(var i=0;i<5;i++) {    
         search = wtags[i]+ " music";
         searchVideosMoods();
     }
@@ -284,4 +282,34 @@ function nextSong() {
     currentVideo = videoIDs[currentIndex];
 
     embedVideo();
+}
+
+function httpGet(){
+    var xmlHttp = null;    
+    var theUrl = "https://youplayradio.firebaseio.com/.json";
+    
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET",theUrl,false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+
+function getData(){
+    var json = httpGet();
+    json = jQuery.parseJSON(json);
+    
+    stags = json.StudyTags; ctags = json.ChillTags; htags = json.HappyTags; ptags = json.PartyTags; wtags = json.WorkOutTags;
+    for(var i=0;i<stags.length;i++)
+    {
+     if(stags[i] == null)
+         stags.splice(i,1);
+     if(ctags[i] == null)
+         ctags.splice(i,1);
+     if(htags[i] == null)
+         htags.splice(i,1);
+     if(ptags[i] == null)
+         ptags.splice(i,1);
+     if(wtags[i] == null)
+         wtags.splice(i,1);
+    }
 }
