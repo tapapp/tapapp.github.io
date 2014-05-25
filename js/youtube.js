@@ -58,7 +58,7 @@ function parseResults() {
     var duration;
     alert(results.items[0].id.videoId);
     alert(results.items[1].id.videoId);
-    $.each(results.items, function(item) {
+    /*$.each(results.items, function(item) {
         if(results.items[item].id.videoId != undefined && results.items[item].id.videoId != null)
         {
                 searchURL = "https://gdata.youtube.com/feeds/api/videos/"+results.items[item].id.videoId+"?v=1";
@@ -80,7 +80,10 @@ function parseResults() {
                     
                 }          
         }
-    });  
+    });  */
+    alert(results.items.length);
+    
+    alert(videoIDs);
     
     shuffleArray();
     
