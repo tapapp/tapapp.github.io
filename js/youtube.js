@@ -54,14 +54,34 @@ function parseResults() {
     
     $.each(results.items, function(item) {
         if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
-            videoIDs.push(results.items[item].id.videoId);
+        {
+                var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
+    
+                var xmlHttp = null;
+            
+                xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", searchURL, false );
+                xmlHttp.send( null );
+                results = xmlHttp.responseText;
+            
+                var splits = results.split("duration='");
+                splits.splice(0, 1);
+                results = splits[0];
+                var loc = results.indexOf("'");
+                var duration = results.substring(0,loc);
+                
+                if (duration < 500) {
+                    videoIDs.push(results.items[item].id.videoId);
+                    
+                }          
+        }
     });  
     
     shuffleArray();
     
     //window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
     
-    /*var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
+    var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
     
     var xmlHttp = null;
 
@@ -77,9 +97,9 @@ function parseResults() {
     var duration = results.substring(0,loc);
     
     if (duration > 500) {
-    
+        results.splice(
         
-    }*/
+    }
     
     
 }
