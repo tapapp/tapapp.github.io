@@ -3101,13 +3101,13 @@ input[type="button"].btn-block {
 .navbar-fixed-bottom .dropdown .caret {
   content: "";
   border-top: 0;
-  border-bottom: 4px solid;
+  border-bottom: 0;
 }
 .dropup .dropdown-menu,
 .navbar-fixed-bottom .dropdown .dropdown-menu {
   top: auto;
   bottom: 100%;
-  margin-bottom: 1px;
+  margin-bottom: 0;
 }
 @media (min-width: 768px) {
   .navbar-right .dropdown-menu {

@@ -4,6 +4,7 @@ html,
 body {
   height: 100%;
   width: 100%;
+  overflow:hidden;      
 }
 
 .vert-text {
@@ -119,18 +120,47 @@ body {
 }
 
 .main-header {
-  position: absolute;    
+  position: absolute;   
   text-align: left;
+  width: 1000px;
+  z-index: 2;
+}
+
+#fott {
+  position: absolute;   
+  text-align: left;
+  padding-left: 37.5%;
+  width: 100%;
   background-color: Black;    
   z-index: 2;
 }
 
 .main-footer {
-  background:green;
-  width:500px;
-  height:100px; 
-  margin-top:100px;
+  position: absolute;   
+  text-align: left;
+  width: 175px;
+  background-color: Black; 
+  top: 100px;
   z-index: 3;
+}
+
+.ytplayer-new {
+  position: center;
+  z-index: 3;
+}
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 90%;
+	height: 87.5%;
 }
 
 /* Intro */
