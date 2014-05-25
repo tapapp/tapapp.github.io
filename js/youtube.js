@@ -51,7 +51,7 @@ function parseResultsMoods() {
 function setChill() {
     shufflectags();
     alert(ctags);
-    for(int i=0;i<3;i++) {    
+    for(var i=0;i<3;i++) {    
         search = ctags[i]+ " music";
         searchVideosMoods();
     }
