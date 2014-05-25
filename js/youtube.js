@@ -1,7 +1,8 @@
 var search;
 var category = "music";
-var vidURL;
 var results;
+var currentVideo;
+var currentIndex;
 
 var videoIDs = [];
 
@@ -74,7 +75,9 @@ function parseResults() {
     splits.splice(0, 1);
     results = splits[0];
     var loc = results.indexOf("'");
-    alert(loc);
+    var duration =  results.substring(0,4);
+    
+    alert(duration);
     
 }
 
@@ -89,4 +92,26 @@ function shuffleArray() {
     }
     
     videoIDs = array;
+    
+    embedVideo();
+}
+
+function embedVideo() {
+    currentIndex = 0;
+    currentVideo = videoIDs[currentIndex];
+    
+    
+    $('#videoplayer').append('');
+    'http://www.youtube.com/watch?v='+videoIDs[0]+'&controls=0&autoplay=1&autohide=1&color=white';
+}
+
+function pause() {
+       
+    
+}
+
+function nextSong() {
+    currentIndex++;
+    currentVideo = videoIDs[currentIndex];
+    embedVideo();
 }
