@@ -51,24 +51,29 @@ function setSearch() {
 function parseResults() {
     
     videoIDs = [];
+    var xmlHttp;
+    var searchURL;
+    var splits;
+    var loc;
+    var duration;
     
     $.each(results.items, function(item) {
         if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
         {
-                var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
+                searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
     
-                var xmlHttp = null;
+                xmlHttp = null;
             
                 xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "GET", searchURL, false );
                 xmlHttp.send();
                 results = xmlHttp.responseText;
             
-                var splits = results.split("duration='");
+                splits = results.split("duration='");
                 splits.splice(0, 1);
                 results = splits[0];
-                var loc = results.indexOf("'");
-                var duration = results.substring(0,loc);
+                loc = results.indexOf("'");
+                duration = results.substring(0,loc);
                 alert(duration);
                 if (duration < 500) {
                     videoIDs.push(results.items[item].id.videoId);
