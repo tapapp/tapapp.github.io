@@ -14,7 +14,7 @@ function searchVideos() {
 
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", searchURL, false );
-    xmlHttp.send( null );
+    //xmlHttp.send( null );
     results = xmlHttp.responseText;
     console.log(results);
     
@@ -75,7 +75,12 @@ function parseResults() {
     splits.splice(0, 1);
     results = splits[0];
     var loc = results.indexOf("'");
-    var duration = results.substring(0,loc);*/
+    var duration = results.substring(0,loc);
+    
+    if (duration > 300) {
+    
+        
+    }*/
     
     
 }
