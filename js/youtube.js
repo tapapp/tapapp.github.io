@@ -58,7 +58,7 @@ function parseResults() {
     });  
     
     shuffleArray();
-    //window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
+    window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
     
     /*var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
     
@@ -75,7 +75,7 @@ function parseResults() {
     var loc = results.indexOf("'");
     var duration = results.substring(0,loc);
     
-    if (duration > 300) {
+    if (duration > 500) {
     
         
     }*/
