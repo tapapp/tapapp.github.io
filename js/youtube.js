@@ -56,7 +56,8 @@ function parseResults() {
     var splits;
     var loc;
     var duration;
-    
+    alert(results.items[0].id.videoId);
+    alert(results.items[1].id.videoId);
     $.each(results.items, function(item) {
         if(results.items[item].id.videoId != undefined && results.items[item].id.videoId != null)
         {
