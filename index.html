@@ -7,14 +7,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>YouPlayer Radio</title>
-
+    <title>YouPlay Radio</title>
+    
+    <script type="text/javascript" src="http://www.youtube.com/player_api"></script>
+    
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Add custom CSS here -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        player = new YT.Player('player');
+    </script>
 </head>
 
 <body>
@@ -24,8 +29,8 @@
     </header>
     
     <div class="navbar navbar-fixed-bottom" id="fott">
-            <a onclick="javascript:pause();"><img src="img/icons/pause.png" alt="Banner Image" width="70" height="70"/></a>
-            <a onclick="javascript:play();"><img src="img/icons/play.png" alt="Banner Image" width="70" height="70"/></a>
+            <a onclick="player.pauseVideo();"><img src="img/icons/pause.png" alt="Banner Image" width="70" height="70"/></a>
+            <a onclick="player.playVideo();"><img src="img/icons/play.png" alt="Banner Image" width="70" height="70"/></a>
             <a onclick="javascript:pause();"><img src="img/icons/skip.png" alt="Banner Image" width="70" height="70"/></a>
     </div>
     

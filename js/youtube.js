@@ -109,10 +109,6 @@ function embedVideo() {
     
 }
 
-function pause() {
-    alert("hello");
-    document.getElementById('idank').pauseVideo;
-}
 
 function nextSong() {
     currentIndex++;
