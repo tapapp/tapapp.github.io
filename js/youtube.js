@@ -7,7 +7,7 @@ var currentIndex;
 var videoIDs = [];
 
 function searchVideos() {
-    alert(search);
+
     var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&maxResults=50";
     
     var xmlHttp = null;
@@ -17,9 +17,8 @@ function searchVideos() {
     xmlHttp.send();
     results = xmlHttp.responseText;
     //console.log(results);
-    alert(results);
     results = $.parseJSON(results);
-
+    alert(results);
     parseResults();
     
     
