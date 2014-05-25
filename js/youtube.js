@@ -3,7 +3,8 @@ var category = "music";
 var results;
 var currentVideo;
 var currentIndex;
-var videoIDs, chillTags, happyTags, studyingTags, partyTags, workoutTags = [];
+var videoIDs, ctags, htags, stags, ptags, wtags = [];
+
 function searchVideos() {
 
     var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&maxResults=50";
@@ -21,9 +22,39 @@ function searchVideos() {
    
 }
 
+function searchVideosMoods() {
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&maxResults=50";
+    
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", searchURL, false );
+    xmlHttp.send();
+    results = xmlHttp.responseText;
+    //console.log(results);
+    results = $.parseJSON(results);
+    parseResultsMoods();    
+    
+}
+
+function parseResultsMoods() {
+    
+    $.each(results.items, function(item) {
+        if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
+            videoIDs.push(results.items[item].id.videoId);
+    });  
+    
+}
+
 function setChill() {
-    search="chill music";
-    searchVideos();
+    videoIDs = [];
+    for(int i=0; i<3; i++){
+        search="chill music"; //get Search
+        searchVideos();
+    }
+    shuffleArray();
+    currentIndex = 0;
+    embedVideo();
 }
 function setHappy() {
     search="happy music";
@@ -44,6 +75,10 @@ function setWorkout() {
 function setSearch() {
     search = document.getElementById("search").value + " music";
     searchVideos();
+}
+
+function getVideosMoods() {
+    
 }
 
 function parseResults() {
