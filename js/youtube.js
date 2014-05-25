@@ -18,7 +18,7 @@ function searchVideos() {
     results = xmlHttp.responseText;
     //console.log(results);
     results = $.parseJSON(results);
-    alert(results);
+
     parseResults();
    
 }
@@ -93,7 +93,7 @@ function shuffleArray() {
     }
     
     videoIDs = array;
-    alert(videoIDs);
+
     embedVideo();
 }
 
