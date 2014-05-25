@@ -48,7 +48,7 @@ function parseResultsMoods() {
 
 function setChill() {
     videoIDs = [];
-    for(var i=0; i<3; i++){
+    for(var i=0; i < 3; i++){
         search="chill music"; //get Search
         searchVideos();
     }
