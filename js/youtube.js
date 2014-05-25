@@ -59,7 +59,7 @@ function parseResults() {
     
     shuffleArray();
     
-    window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
+   /* window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
     
     var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
     
@@ -69,13 +69,12 @@ function parseResults() {
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send( null );
     results = xmlHttp.responseText;
-    console.log(results);
 
     var splits = results.split("duration='");
     splits.splice(0, 1);
     results = splits[0];
     var loc = results.indexOf("'");
-    var duration =  results.substring(0,loc);
+    var duration = results.substring(0,loc);*/
     
     
 }
