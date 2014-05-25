@@ -22,8 +22,11 @@ function searchVideos() {
 }
 
 function setChill() {
-    search="chill music";
-    searchVideos();
+    for(int i=0; i< 3; i++)
+    {
+        search="chill music";
+        searchVideos();
+    }
 }
 function setHappy() {
     search="happy music";
@@ -127,7 +130,6 @@ function play() {
 }
 
 function onPlayerStateChange(event) {
-    alert(event.data);
     if(YT.PlayerState.ENDED == event.data){
         nextSong();
     }
