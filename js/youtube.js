@@ -168,6 +168,10 @@ function onPlayerStateChange(event) {
     }
 }
 
+function flagSong() {
+    alert('flagged');
+}
+
 function nextSong() {
     
     currentIndex++;
