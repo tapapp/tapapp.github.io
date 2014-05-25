@@ -121,6 +121,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 function pause() {
+    onclick=alert("lol");
     player.pauseVideo();
 }
 
