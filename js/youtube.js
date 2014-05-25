@@ -5,7 +5,7 @@ var currentVideo;
 var currentIndex;
 var videoIDs, ctags, htags, stags, ptags, wtags = [];
 
-ctags = ["chill", "porn", "gambino"];
+ctags = ["chill", "football", "gambino"];
 
 function searchVideos() {
 
@@ -51,30 +51,63 @@ function parseResultsMoods() {
 function setChill() {
     videoIDs = [];
     shufflectags();
-    alert(ctags);
+
     for(var i=0;i<3;i++) {    
         search = ctags[i]+ " music";
+        searchVideosMoods();
+    }
+    shuffleArray();
+    alert(videoIDs.length);
+    currentIndex = 0;
+    embedVideo();
+}
+function setHappy() {
+    videoIDs = [];
+    shufflehtags();
+
+    for(var i=0;i<3;i++) {    
+        search = htags[i]+ " music";
         searchVideosMoods();
     }
     shuffleArray();
     currentIndex = 0;
     embedVideo();
 }
-function setHappy() {
-    search="happy music";
-    searchVideos();
-}
 function setStudying() {
-    search="studying music";
-    searchVideos();
+    videoIDs = [];
+    shufflestags();
+
+    for(var i=0;i<3;i++) {    
+        search = stags[i]+ " music";
+        searchVideosMoods();
+    }
+    shuffleArray();
+    currentIndex = 0;
+    embedVideo();
 }
 function setParty() {
-    search="party music";
-    searchVideos();
+    videoIDs = [];
+    shuffleptags();
+
+    for(var i=0;i<3;i++) {    
+        search = ptags[i]+ " music";
+        searchVideosMoods();
+    }
+    shuffleArray();
+    currentIndex = 0;
+    embedVideo();
 }
 function setWorkout() {
-    search="workout music";
-    searchVideos();
+    videoIDs = [];
+    shufflewtags();
+
+    for(var i=0;i<3;i++) {    
+        search = wtags[i]+ " music";
+        searchVideosMoods();
+    }
+    shuffleArray();
+    currentIndex = 0;
+    embedVideo();
 }
 function setSearch() {
     search = document.getElementById("search").value + " music";
