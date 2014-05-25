@@ -280,7 +280,9 @@ function onPlayerStateChange(event) {
 
 function flagged() {
     
-         $('flagger').location.href = "mailto:youplayradio@gmail.com?Subject=Flagged%20Video&Body=Link:%20http://youtube.com/watch/"+currentVideo;    
+         $('#flagger').attr('href', "mailto:youplayradio@gmail.com?Subject=Flagged%20Video&Body=Link:%20http://youtube.com/watch/"+currentVideo);  
+    
+    window.location=document.getElementById('flagger').href;
 }
 
 function nextSong() {
