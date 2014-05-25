@@ -38,10 +38,19 @@ function searchVideosMoods() {
 }
 
 function parseResultsMoods() {
-    
+    var exists;
     $.each(results.items, function(item) {
-        if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
-            videoIDs.push(results.items[item].id.videoId);
+
+        if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined) {
+            exists = 0;
+            $.each(videoIDs, function(i) {
+                if(videoIDs[i] == results.items[item].id.videoId)
+                    exists = 1;
+            });
+            if (exists = 0)
+                videoIDs.push(results.items[item].id.videoId);
+            
+        }
     });  
     
 }
@@ -52,7 +61,6 @@ function setChill() {
         search="chill music"; //get Search
         searchVideosMoods();
     }
-    alert(videoIDs.length);
     shuffleArray();
     alert(videoIDs.length);
     currentIndex = 0;
