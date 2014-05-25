@@ -123,9 +123,9 @@ function parseResults() {
     $.each(results.items, function(item) {
         if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
         {
-           // if(removedVideos.indexOf(results.items[item].id.videoId) == -1) {
+            if(removedVideos.indexOf(results.items[item].id.videoId) == -1) {
                 videoIDs.push(results.items[item].id.videoId);
-           // }
+            }
             
         }
     });  
@@ -325,9 +325,9 @@ function getData(){
          wtags.splice(i,1);
     }
     
-   /* for(var i=0;i<removedVideos.length;i++)
+    for(var i=0;i<removedVideos.length;i++)
     {
         if(removedVideos[i] == null)
             removedVideos.splice(i,1);
-    }*/
+    }
 }
