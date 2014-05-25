@@ -61,7 +61,7 @@ function parseResults() {
         if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
         {
                 searchURL = "https://gdata.youtube.com/feeds/api/videos/"+results.items[item].id.videoId+"?v=1";
-    
+                alert(searchURL);
                 xmlHttp = null;
             
                 xmlHttp = new XMLHttpRequest();
