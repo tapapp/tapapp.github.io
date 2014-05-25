@@ -20,7 +20,14 @@
 <body>
 
     <header class="main-header" role="banner">
-        <img src="img/icons/logo.png" alt="Banner Image" width="160" height="75"/>
+        <form role="form">
+          <div class="form-group">
+              <input type="text" class="form-control" id="search" placeholder="Search by Artist, Song, Genre... " onchange="save()">
+          </div>
+          <div>
+            <img src="img/icons/logo.png" alt="Banner Image" width="160" height="75"/>
+          </div>
+        </form>
     </header>
     
     <div class="navbar navbar-fixed-bottom" id="fott">
@@ -33,10 +40,6 @@
     <!-- Side Menu -->
     <div id="sidebar-wrapper">   
         <ul class="sidebar-nav">
-              <div class="form-group">
-                  <br><br>
-                  <input type="text" class="form-control" id="search" placeholder="Search by Artist, Song, Genre... " onkeydown="if (event.keyCode == 13) { setSearch(); }">
-              </div>
         <script>
             var search = document.getElementById("search").value;
         </script>
@@ -63,7 +66,7 @@
     <div id="top" class="header">
         <div class="vert-text">
             <div class="videoWrapper" id="videoplayer">
-               <!-- <iframe width="560" height="310" src="http://www.youtube.com/embed/0uBOtQOO70Y?&fs=0&controls=0&autohide=1&color=white&autoplay=1&version=3&enablejsapi=1" frameborder="0" ></iframe>       -->
+                <iframe width="560" height="310" src="http://www.youtube.com/embed/icO_tRjilDI?&fs=0&controls=0&autohide=1&color=white&autoplay=1&version=3&enablejsapi=1" frameborder="0" ></iframe>       
             </div>
         </div>
     </div>
@@ -74,6 +77,7 @@
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/youtube.js"></script>
+    <script src="js/player.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
 
     <!-- Custom JavaScript for the Side Menu and Smooth Scrolling -->
