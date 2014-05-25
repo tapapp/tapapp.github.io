@@ -14,7 +14,7 @@ function searchVideos() {
 
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", searchURL, false );
-    xmlHttp.send( null );
+    xmlHttp.send();
     results = xmlHttp.responseText;
     console.log(results);
     
