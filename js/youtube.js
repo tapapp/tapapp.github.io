@@ -54,7 +54,8 @@ function parseResults() {
     videoIDs = [];
     
     $.each(results.items, function(item) {
-        videoIDs.push(results.items[item].id.videoId);
+        if(results.items[item].id.videoId.length > 0)
+            videoIDs.push(results.items[item].id.videoId);
     });  
     
     shuffleArray();
