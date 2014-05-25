@@ -320,9 +320,9 @@ function getData(){
          wtags.splice(i,1);
     }
     
-    for(var i=0;i<removedVideos.length;i++)
+   /* for(var i=0;i<removedVideos.length;i++)
     {
         if(removedVideos[i] == null)
             removedVideos.splice(i,1);
-    }
+    }*/
 }
