@@ -110,8 +110,7 @@ function embedVideo() {
 }
 
 function pause() {
-       
-    
+    document.getElementById('idank').pauseVideo;
 }
 
 function nextSong() {
