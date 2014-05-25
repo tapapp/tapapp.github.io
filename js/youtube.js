@@ -107,6 +107,8 @@ function embedVideo() {
         $('#videoplayer').append("<iframe width='560' id='idank' height='310' src='http://www.youtube.com/embed/"+currentVideo+"?&fs=0&controls=0&autohide=1&color=white&autoplay=1&version=3&enablejsapi=1&iv_load_policy=3' frameborder='0' ></iframe>");
     }
     
+    onYouTubeIframeAPIReady();
+    
 }
 
 var player;
@@ -114,7 +116,6 @@ var player;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('idank', {
     events: {
-      'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
     }
   });
@@ -126,6 +127,9 @@ function pause() {
     player.pauseVideo();
 }
 
+function onPlayerStateChance() {
+    
+}
 
 function nextSong() {
     currentIndex++;
