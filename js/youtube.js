@@ -129,7 +129,9 @@ function play() {
 }
 
 function onPlayerStateChange(event) {
-    
+    if(done){
+        nextSong();
+    }
 }
 
 function nextSong() {
