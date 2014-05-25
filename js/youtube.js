@@ -127,7 +127,8 @@ function play() {
 }
 
 function onPlayerStateChange(event) {
-    if(done){
+    alert(event.data);
+    if(YT.PlayerState.ENDED == event.data){
         nextSong();
     }
 }
