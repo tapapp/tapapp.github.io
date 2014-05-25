@@ -71,9 +71,10 @@ function parseResults() {
     console.log(results);
 
     var splits = results.split("duration='");
-
     splits.splice(0, 1);
-    alert(splits);
+    results = splits[0];
+    var loc = results.indexOf("'");
+    alert(loc);
     
 }
 
