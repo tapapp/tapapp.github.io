@@ -50,7 +50,7 @@ function setChill() {
     videoIDs = [];
     for(var i=0; i < 3; i++){
         search="chill music"; //get Search
-        searchVideos();
+        searchVideosMoods();
     }
     shuffleArray();
     alert(videoIDs.length);
