@@ -96,7 +96,6 @@ function shuffleArray() {
     }
     
     videoIDs = array;
-    alert('shuffling');
     alert(videoIDs);
     embedVideo();
 }
@@ -105,7 +104,6 @@ function embedVideo() {
     $('#videoplayer').empty();
     currentIndex = 0;
     currentVideo = videoIDs[currentIndex];
-    alert(currentVideo);
     if(currentVideo == null || currentVideo == undefined)
         alert("No results found!");
     else {
