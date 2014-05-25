@@ -4,10 +4,8 @@ var results;
 var currentVideo;
 var currentIndex;
 var videoIDs, ctags, htags, stags, ptags, wtags = [];
-var ctags2, htags2, stags2, ptags2, wtags2 =[];
 
 ctags = ["chill", "porn", "gambino"];
-ctags2=[""];
 
 function searchVideos() {
 
@@ -51,15 +49,10 @@ function parseResultsMoods() {
 }
 
 function setChill() {
-    videoIDs = [];
-    for(var i=0; i < 3; i++){
-        search = ctags[Math.floor(Math.random() * ctags.length)];
-        while (ctags2.indexOf(search) !== -1)
-        {
-            search = ctags[Math.floor(Math.random() * ctags.length)];
-        }
-        ctags2.push(search);
-        search = search + " music";
+    shufflectags();
+    alert(ctags);
+    for(int i=0;i<3;i++) {    
+        search = ctags[i]+ " music";
         searchVideosMoods();
     }
     shuffleArray();
@@ -138,6 +131,76 @@ function shuffleArray() {
     videoIDs = array;
 
     embedVideo();
+}
+
+function shufflectags() {
+    
+    var array = ctags;
+    
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    ctags = array;     
+}
+
+function shufflehtags() {
+    
+    var array = htags;
+    
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    htags = array;     
+}
+
+function shufflestags() {
+    
+    var array = stags;
+    
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    stags = array;     
+}
+
+function shuffleptags() {
+    
+    var array = ptags;
+    
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    ptags = array;     
+}
+
+function shufflewtags() {
+    
+    var array = wtags;
+    
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    wtags = array;     
 }
 
 function embedVideo() {
