@@ -60,7 +60,7 @@ function parseResults() {
     
     //window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
     
-    var searchURL = "https://gdata.youtube.com/feeds/api/videos/videoid?v="+videoIDs[0];
+    var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
     
     var xmlHttp = null;
 
