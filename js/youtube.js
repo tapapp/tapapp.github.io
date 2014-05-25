@@ -133,10 +133,9 @@ function onPlayerStateChange(event) {
 }
 
 function nextSong() {
-    alert(currentVideo);
     
     currentIndex++;
     currentVideo = videoIDs[currentIndex];
-    alert(currentVideo);
+
     embedVideo();
 }
