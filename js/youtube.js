@@ -47,6 +47,7 @@ function setWorkout() {
 }
 function setSearch() {
     search = document.getElementById("search").value;
+    alert(search);
     searchVideos();
 }
 
