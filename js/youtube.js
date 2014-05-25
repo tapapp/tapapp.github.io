@@ -53,6 +53,7 @@ function setChill() {
         searchVideos();
     }
     shuffleArray();
+    alert(videoIDs.length);
     currentIndex = 0;
     embedVideo();
 }
