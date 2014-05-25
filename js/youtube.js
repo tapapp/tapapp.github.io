@@ -54,7 +54,7 @@ function parseResults() {
     videoIDs = [];
     
     $.each(results.items, function(item) {
-        if(results.items[item].id.videoId.length > 0)
+        if(results.items[item].id.videoId !== null && results.items[item].id.videoId !== undefined)
             videoIDs.push(results.items[item].id.videoId);
     });  
     
