@@ -81,8 +81,6 @@ function parseResults() {
     
     //window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
     
-    }
-    
 }
 
 function shuffleArray() {
