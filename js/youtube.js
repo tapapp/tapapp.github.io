@@ -104,7 +104,7 @@ function embedVideo() {
     currentIndex = 0;
     currentVideo = videoIDs[currentIndex];
     
-    $('#videoplayer').append( "<iframe width='560' height='310' src='http://www.youtube.com/embed/'"+videoIDs[0]+"'?&fs=0&controls=0&autohide=1&color=white&autoplay=1&version=3&enablejsapi=1' frameborder='0' ></iframe>'");
+    $('#videoplayer').append( "<iframe width='560' height='310' src='http://www.youtube.com/embed/"+videoIDs[0]+"?&fs=0&controls=0&autohide=1&color=white&autoplay=1&version=3&enablejsapi=1' frameborder='0' ></iframe>'");
                         
 }
 
