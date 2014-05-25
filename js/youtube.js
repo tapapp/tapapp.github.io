@@ -7,6 +7,7 @@ var videoIDs, ctags, htags, stags, ptags, wtags = [];
 var ctags2, htags2, stags2, ptags2, wtags2 =[];
 
 ctags = ["chill", "porn", "gambino"];
+ctags2=[""];
 
 function searchVideos() {
 
