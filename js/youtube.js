@@ -241,6 +241,8 @@ function shufflewtags() {
 }
 
 function embedVideo() {
+    if(videoIDs.length == 0)
+        alert("No results found!");
     $('#videoplayer').empty();
     currentVideo = videoIDs[currentIndex];
     if(currentVideo == null || currentVideo == undefined){
