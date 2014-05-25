@@ -70,6 +70,8 @@ function parseResults() {
     results = xmlHttp.responseText;
     console.log(results);
 
+    var splits = results.split("duration='");
+    alert(splits);
     
 }
 
