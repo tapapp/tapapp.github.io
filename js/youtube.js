@@ -5,6 +5,7 @@ var currentVideo;
 var currentIndex;
 var videoIDs, ctags, htags, stags, ptags, wtags = [];
 var removedVideos = [];
+var currentStatus = 0;
 
 function searchVideos() {
 
@@ -241,6 +242,11 @@ function shufflewtags() {
 }
 
 function embedVideo() {
+    currentStatus=1;
+    if(currentStatus == 1)
+    {
+        changeBackground();
+    }
     if(videoIDs.length == 0)
         alert("No results found!");
     $('#videoplayer').empty();
@@ -336,4 +342,8 @@ function getData(){
         if(removedVideos[i] == null)
             removedVideos.splice(i,1);
     }
+}
+
+function changeBackground() {
+    $('#videoplayer').css({"background":"#000"});
 }
