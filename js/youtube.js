@@ -52,10 +52,10 @@ function parseResultsMoods() {
 function setChill() {
     videoIDs = [];
     for(var i=0; i < 3; i++){
-        search = ctags[Math.floor(Math.random() * myArray.length)];
+        search = ctags[Math.floor(Math.random() * ctags.length)];
         while (ctags2.indexOf(search) !== -1)
         {
-            search = ctags[Math.floor(Math.random() * myArray.length)];
+            search = ctags[Math.floor(Math.random() * ctags.length)];
         }
         ctags2.push(search);
         search = search + " music";
