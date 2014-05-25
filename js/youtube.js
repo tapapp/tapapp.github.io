@@ -58,10 +58,9 @@ function parseResults() {
     var duration;
     
     $.each(results.items, function(item) {
-        if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
+        if(results.items[item].id.videoId != undefined && results.items[item].id.videoId != null)
         {
                 searchURL = "https://gdata.youtube.com/feeds/api/videos/"+results.items[item].id.videoId+"?v=1";
-                alert(searchURL);
                 xmlHttp = null;
             
                 xmlHttp = new XMLHttpRequest();
