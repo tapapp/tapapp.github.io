@@ -8,7 +8,7 @@ var videoIDs = [];
 
 function searchVideos() {
     
-    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&max-results=100";
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&maxResults=100";
     
     var xmlHttp = null;
 
@@ -60,9 +60,9 @@ function parseResults() {
     
     shuffleArray();
     
-    window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
+    /*window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
     
-   /* var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
+    var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
     
     var xmlHttp = null;
 
