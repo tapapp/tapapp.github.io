@@ -94,6 +94,7 @@ function shuffleArray() {
     }
     
     videoIDs = array;
+    alert('shuffling');
     alert(videoIDs);
     embedVideo();
 }
