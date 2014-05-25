@@ -4,6 +4,7 @@ var results;
 var currentVideo;
 var currentIndex;
 var videoIDs, ctags, htags, stags, ptags, wtags = [];
+var removedVideos = [];
 
 function searchVideos() {
 
@@ -121,7 +122,11 @@ function parseResults() {
     
     $.each(results.items, function(item) {
         if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
+        {
+            
             videoIDs.push(results.items[item].id.videoId);
+            
+        }
     });  
     
     shuffleArray();
@@ -237,7 +242,8 @@ function shufflewtags() {
 function embedVideo() {
     $('#videoplayer').empty();
     currentVideo = videoIDs[currentIndex];
-    if(currentVideo == null || currentVideo == undefined)
+    if(currentVideo == null || currentVideo == undefined){
+    }
         //alert("No results found!");
     else {
         $('#videoplayer').append("<iframe width='560' id='idank' height='310' src='http://www.youtube.com/embed/"+currentVideo+"?&fs=0&controls=0&autohide=1&color=white&autoplay=1&version=3&enablejsapi=1&iv_load_policy=3' frameborder='0' ></iframe>");
@@ -272,12 +278,8 @@ function onPlayerStateChange(event) {
 }
 
 function flagged() {
-    $("#emailLnk").click(function()
-     {
-         alert('h');
-         document.location.href = "mailto:xyz@something.com";
-     });
     
+         $('flagger').location.href = "mailto:youplayradio@gmail.com?Subject=Flagged%20Video&Body=Link:%20http://youtube.com/watch/"+currentVideo;    
 }
 
 function nextSong() {
@@ -302,7 +304,7 @@ function getData(){
     var json = httpGet();
     json = jQuery.parseJSON(json);
     
-    stags = json.StudyTags; ctags = json.ChillTags; htags = json.HappyTags; ptags = json.PartyTags; wtags = json.WorkOutTags;
+    stags = json.StudyTags; ctags = json.ChillTags; htags = json.HappyTags; ptags = json.PartyTags; wtags = json.WorkOutTags; removedVideos = json.removedVideos;
     for(var i=0;i<stags.length;i++)
     {
      if(stags[i] == null)
@@ -315,5 +317,11 @@ function getData(){
          ptags.splice(i,1);
      if(wtags[i] == null)
          wtags.splice(i,1);
+    }
+    
+    for(var i=0;i<removedVideos.length;i++)
+    {
+        if(removedVideos[i] == null)
+            removedVideos.splice(i,1);
     }
 }
