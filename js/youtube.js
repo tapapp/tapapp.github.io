@@ -17,7 +17,7 @@ function searchVideos() {
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send();
     results = xmlHttp.responseText;
-    //console.log(results);
+
     results = $.parseJSON(results);
     currentIndex = 0;
     parseResults();
@@ -33,18 +33,35 @@ function searchVideosMoods() {
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send();
     results = xmlHttp.responseText;
-    //console.log(results);
+
     results = $.parseJSON(results);
     parseResultsMoods();    
-    
 }
 
 function parseResultsMoods() {
     
     $.each(results.items, function(item) {
         if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
+                videoIDs.push(results.items[item].id.videoId);
+    });
+    
+    var nextPageToken = results.nextPageToken;
+    
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&maxResults=50&pageToken="+nextPageToken;
+    
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", searchURL, false );
+    xmlHttp.send();
+    results = xmlHttp.responseText;
+    //console.log(results);
+    results = $.parseJSON(results);
+    
+    $.each(results.items, function(item) {
+        if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
             videoIDs.push(results.items[item].id.videoId);
-    });  
+    });
     
 }
 
@@ -52,7 +69,7 @@ function setChill() {
     videoIDs = [];
     shufflectags();
 
-    for(var i=0;i<5;i++) {    
+    for(var i=0;i<3;i++) {    
         search = ctags[i]+ " music";
         searchVideosMoods();
     }
@@ -64,7 +81,7 @@ function setHappy() {
     videoIDs = [];
     shufflehtags();
 
-    for(var i=0;i<5;i++) {    
+    for(var i=0;i<3;i++) {    
         search = htags[i]+ " music";
         searchVideosMoods();
     }
@@ -76,7 +93,7 @@ function setStudying() {
     videoIDs = [];
     shufflestags();
 
-    for(var i=0;i<5;i++) {    
+    for(var i=0;i<3;i++) {    
         search = stags[i]+ " music";
         searchVideosMoods();
     }
@@ -88,7 +105,7 @@ function setParty() {
     videoIDs = [];
     shuffleptags();
 
-    for(var i=0;i<5;i++) {    
+    for(var i=0;i<3;i++) {    
         search = ptags[i]+ " music";
         searchVideosMoods();
     }
@@ -100,7 +117,7 @@ function setWorkout() {
     videoIDs = [];
     shufflewtags();
 
-    for(var i=0;i<5;i++) {    
+    for(var i=0;i<3;i++) {    
         search = wtags[i]+ " music";
         searchVideosMoods();
     }
@@ -290,8 +307,9 @@ function flagged() {
     if(currentVideo == null || currentVideo == undefined)
         alert("No video to flag!");
     else {
-         $('#flagger').attr('href', "mailto:youplayradio@gmail.com?Subject=Flagged%20Video&Body=Link:%20http://youtube.com/watch/"+currentVideo);  
-    
+         //$('#flagger').attr('href', "mailto:youplayradio@gmail.com?Subject=Flagged%20Video&Body=Link:%20http://youtube.com/watch/"+currentVideo);  
+    var videoLink = "http://youtube.com/watch/"+currentVideo;
+    var searchText = search;
     window.location=document.getElementById('flagger').href;
     }
 }
@@ -323,20 +341,26 @@ function getData(){
     {
      if(stags[i] == null)
          stags.splice(i,1);
+    }
+    for(var i=0;i<htags.length;i++)
+    {
      if(htags[i] == null)
          htags.splice(i,1);
+    }
+    for (var i=0;i<ptags.length;i++)
+    {
      if(ptags[i] == null)
          ptags.splice(i,1);
+    }
+    for (var i=0;i<wtags.length;i++){
      if(wtags[i] == null)
          wtags.splice(i,1);
     }
-    
     for (var i=0; i<ctags.length;i++)
     {
         if(ctags[i] == null)
          ctags.splice(i,1);
     }
-    
     for(var i=0;i<removedVideos.length;i++)
     {
         if(removedVideos[i] == null)
