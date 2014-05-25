@@ -18,7 +18,7 @@ function searchVideos() {
     results = xmlHttp.responseText;
     //console.log(results);
     results = $.parseJSON(results);
-
+    currentIndex = 0;
     parseResults();
    
 }
@@ -99,7 +99,6 @@ function shuffleArray() {
 
 function embedVideo() {
     $('#videoplayer').empty();
-    currentIndex = 0;
     currentVideo = videoIDs[currentIndex];
     if(currentVideo == null || currentVideo == undefined)
         alert("No results found!");
