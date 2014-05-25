@@ -49,6 +49,7 @@ function parseResultsMoods() {
 }
 
 function setChill() {
+    videoIDs = [];
     shufflectags();
     alert(ctags);
     for(var i=0;i<3;i++) {    
