@@ -16,9 +16,9 @@ function searchVideos() {
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send();
     results = xmlHttp.responseText;
-    console.log(results);
+    //console.log(results);
     results = $.parseJSON(results);
-
+    alert(results);
     parseResults();
    
 }
@@ -51,21 +51,34 @@ function setSearch() {
 function parseResults() {
     
     videoIDs = [];
-    var xmlHttp;
-    var searchURL;
-    var splits;
-    var loc;
-    var duration;
-    alert(results.items[0].id.videoId);
-    alert(results.items[1].id.videoId);
     
-    alert(results.items.length);
-    
-    alert(videoIDs);
+    $.each(results.items, function(item) {
+        if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
+            videoIDs.push(results.items[item].id.videoId);
+    });  
     
     shuffleArray();
     
-    //window.open('http://www.youtube.com/watch?v='+videoIDs[0],'_blank');
+    var searchURL = "https://gdata.youtube.com/feeds/api/videos/"+videoIDs[0]+"?v=1";
+    
+    var xmlHttp = null;
+
+    /*xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", searchURL, false );
+    xmlHttp.send( null );
+    results = xmlHttp.responseText;
+
+    var splits = results.split("duration='");
+    splits.splice(0, 1);
+    results = splits[0];
+    var loc = results.indexOf("'"); IF DURATION IS GREATER THAN 500
+    var duration = results.substring(0,loc);
+    
+    if (duration > 500) {
+        
+        
+    }
+    */
     
 }
 
@@ -80,7 +93,7 @@ function shuffleArray() {
     }
     
     videoIDs = array;
-
+    alert(videoIDs);
     embedVideo();
 }
 
