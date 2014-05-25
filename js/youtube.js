@@ -101,6 +101,7 @@ function shuffleArray() {
 }
 
 function embedVideo() {
+    $('#videoplayer').empty();
     currentIndex = 0;
     currentVideo = videoIDs[currentIndex];
     
