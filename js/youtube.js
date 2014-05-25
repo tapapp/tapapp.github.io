@@ -75,7 +75,7 @@ function parseResults() {
     splits.splice(0, 1);
     results = splits[0];
     var loc = results.indexOf("'");
-    var duration =  results.substring(0,4);
+    var duration =  results.substring(0,loc);
     
     alert(duration);
     
