@@ -122,9 +122,11 @@ function onYouTubeIframeAPIReady() {
 }
 
 function pause() {
-    alert("lol");
-    alert(player);
     player.pauseVideo();
+}
+
+function play() {
+    player.playVideo();
 }
 
 function onPlayerStateChange(event) {
