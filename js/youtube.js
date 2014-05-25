@@ -3,9 +3,7 @@ var category = "music";
 var results;
 var currentVideo;
 var currentIndex;
-
-var videoIDs = [];
-
+var videoIDs, chillTags, happyTags, studyingTags, partyTags, workoutTags = [];
 function searchVideos() {
 
     var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&maxResults=50";
