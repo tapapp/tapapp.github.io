@@ -120,9 +120,19 @@ body {
 }
 
 .main-header {
-  position: absolute;   
+  position: absolute; 
+  display: inline;
   text-align: auto;
   height: 75px;
+  width: 100%;
+  background-color: Black; 
+  z-index: 2;
+}
+
+.main-header2 {
+  position: left; 
+  text-align: auto;
+  height: 80px;
   width: 100%;
   background-color: Black; 
   z-index: 2;
@@ -161,8 +171,8 @@ body {
 
 .videoWrapper iframe {
     position:absolute;
-    top:10%;
-    right:16.8%;
+    top:2%;
+    right:20.2%;
     width:80.4%;
     height:75.5%;
     background:#000;
