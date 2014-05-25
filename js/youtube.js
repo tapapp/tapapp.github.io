@@ -8,7 +8,7 @@ var videoIDs = [];
 
 function searchVideos() {
     
-    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kkmax-results=150";
+    var searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+search+"&key=AIzaSyBqoNc396Db0tYILTe8-qazHwuCwQkF0Kk&max-results=150";
     
     var xmlHttp = null;
 
