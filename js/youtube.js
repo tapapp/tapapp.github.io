@@ -31,7 +31,6 @@ function searchVideosMoods() {
     xmlHttp.open( "GET", searchURL, false );
     xmlHttp.send();
     results = xmlHttp.responseText;
-    alert(results);
     //console.log(results);
     results = $.parseJSON(results);
     parseResultsMoods();    
@@ -44,7 +43,6 @@ function parseResultsMoods() {
         if(results.items[item].id.videoId != null && results.items[item].id.videoId != undefined)
             videoIDs.push(results.items[item].id.videoId);
     });  
-    alert(videoIDs.length);
     
 }
 
@@ -54,6 +52,7 @@ function setChill() {
         search="chill music"; //get Search
         searchVideosMoods();
     }
+    alert(videoIDs.length);
     shuffleArray();
     alert(videoIDs.length);
     currentIndex = 0;
