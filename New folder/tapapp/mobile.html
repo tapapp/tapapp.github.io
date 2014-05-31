@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .stickyfooter {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: some_height;
+        }
+        .logo {
+            width:50%;
+            height:auto;
+        }
+    </style>
+    <head>
+            <title>Tap App</title>
+            <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+            <link rel="stylesheet" href="css/flatui.css"/>
+            <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script src="js/jquerymobile.js"></script>
+    </head>
+
+    <body>
+        <div data-role="page" id="home">
+            <div data-role="content">
+                <div align="center"><img src="images/tap_web_banner.png" class="logo"></div>
+                <p><b>Control</b> &amp; <b>Communicate</b> using customizable tap gestures anywhere on the surface of your smartphone</p>
+            </div>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed" class="stickyfooter" data-tap-toggle="false">
+                <ul>
+                    <li><a href="#" data-icon="home" data-theme="f">Home</a></li>
+                    <li><a href="#download" data-icon="star" data-theme="f">Download</a></li>
+                    <li><a href="#features" data-icon="grid" data-theme="f">Features</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="page" id="download">
+            <div data-role="content">
+                <div align="center"><img src="images/tap_web_banner.png" class="logo"></div>
+                <p>Tap is now available for the Android platform!</p>
+                <a href="https://play.google.com/store/apps/details?id=com.rran.tapapp" data-role="button" data-theme="a">Download</a>
+            </div>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed" class="stickyfooter" data-tap-toggle="false">
+                <ul>
+                    <li><a href="#home" data-icon="home" data-theme="f">Home</a></li>
+                    <li><a href="#" data-icon="star" data-theme="f">Download</a></li>
+                    <li><a href="#features" data-icon="grid" data-theme="f">Features</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="page" id="features">
+            <div data-role="content">
+                <div align="center"><img src="images/tap_web_banner.png" class="logo"></div>
+                <div data-role="collapsible-set">
+                    <div data-role="collapsible">
+                            <h3>Change Music</h3>
+                            <p>This feature allows you to pause or change the current song playing while the phone is in your pocket.</p>
+                        </div>
+                        
+                        <div data-role="collapsible">
+                            <h3>Shuffle Through Apps</h3>
+                            <p>Switch through the apps in the background by tapping the left or right of your phone.</p>
+                        </div>
+                    
+                        <div data-role="collapsible">
+                            <h3>Send Vibrations (coming soon)</h3>
+                            <p>Using a bluetooth connection, send vibrations to another phone with Tap installed for secret and quick communication.</p>
+                        </div>
+                    
+                        <div data-role="collapsible">
+                            <h3>Reject Calls (coming soon)</h3>
+                            <p>Imaging getting a phone call in the middle of an important meeting or interview. Simply tap on your phone (even while its in your pocket) to end the call.</p>
+                        </div>
+                    
+                    </div>
+            </div>
+            <div data-role="navbar" data-iconpos="top" data-position="fixed" class="stickyfooter" data-tap-toggle="false">
+                <ul>
+                    <li><a href="#home" data-icon="home" data-theme="f">Home</a></li>
+                    <li><a href="#download" data-icon="star" data-theme="f">Download</a></li>
+                    <li><a href="#" data-icon="grid" data-theme="f">Features</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+
+</html>

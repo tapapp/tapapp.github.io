@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>YouPlay Radio</title>
+
+    <link rel="icon" href="favicon.ico" type="image/icon">    
+    
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-1.10.2.js"></script>
+
+    <!-- Add custom CSS here -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://www.youtube.com/player_api"></script>
+</head>
+
+<body onload="getData();">    
+     <div style="padding-right:50px;padding-top:2px;float:left">
+         <img src="img/icons/logo.png" alt="Banner Image" width="160" height="75"/>
+    </div>
+    <div style="padding-right:84px;padding-top:2px;float:right">
+            <h2><strong>My Moods</strong></h2>
+    </div>
+    <header class="main-header2" role="banner">
+          <div class="form-group">
+            <br>
+            <input type="text" class="form-control" id="search" placeholder="Search by Artist, Song, Genre... " onkeydown="if(event.keyCode == 13) {setSearch();}">
+          </div>
+    </header>
+    
+    <div class="navbar navbar-fixed-bottom" id="fott">
+            <a onclick="javascript:pause();"><img src="img/icons/pause.png" alt="Banner Image" width="70" height="70"/></a>
+            <a onclick="javascript:play();"><img src="img/icons/play.png" alt="Banner Image" width="70" height="70"/></a>
+            <a onclick="javascript:nextSong();"><img src="img/icons/skip.png" alt="Banner Image" width="70" height="70"/></a>
+            <a onclick="javascript:flagged();" id="flagger"><img src="img/icons/flag.png" alt="Banner Image" width="70" height="70"/></a>
+            <a onclick="javascript:fb_callout();"><img src="img/icons/share.png" width="70" height="70"></a>
+    </div>
+    
+    
+    <!-- Side Menu -->
+    <div id="sidebar-wrapper">   
+        <ul class="sidebar-nav">            
+            <br>
+            <li><a onclick="javascript:setChill();"><img src="img/icons/chill.png" alt="Chill" width="42" height="42">&nbsp;&nbsp;<strong>Chill</strong></a>
+            </li>
+            <br>
+            <li><a onclick="javascript:setHappy();"><img src="img/icons/simely.png" alt="Happy" width="42" height="42">&nbsp;&nbsp;<strong>Happy</strong></a>
+            </li>
+            <br>
+            <li><a onclick="javascript:setStudying();" ><img src="img/icons/study.png" alt="Book" width="42" height="42">&nbsp;&nbsp;<strong>Studying</strong></a>
+            </li>
+            <br>
+            <li><a onclick="javascript:setParty();"><img src="img/icons/party.png" alt="Party" width="42" height="42">&nbsp;&nbsp;<strong>Party</strong></a>
+            </li>
+            <br>
+            <li><a onclick="javascript:setWorkout();"><img src="img/icons/workout.png" alt="Workout" width="42" height="42">&nbsp;&nbsp;<strong>Workout</strong></a>
+            </li>
+            <br>
+            <br>
+            <br>
+                <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:160px;height:90px"
+                     data-ad-client="ca-pub-1569061318646268"
+                     data-ad-slot="4697632236"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>-->
+            <li><a href="http://facebook.com/youplayradio" target="_blank"><img src="img/icons/like.png" alt="Book" width="42" height="42">&nbsp;&nbsp;<strong>Like on Facebook!</strong></a>
+        </ul>
+    </div>
+    <!-- /Side Menu -->
+
+    <!-- Full Page Image Header Area -->
+    <div id="top" class="header">
+        <div class="vert-text">  
+            <div class="videoWrapper" id="videoplayer">
+            </div>
+        </div>
+    </div>
+    <!-- /Full Page Image Header Area -->
+
+  
+    <!-- JavaScript -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/youtube.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+
+    <!-- Custom JavaScript for the Side Menu and Smooth Scrolling -->
+    <script>
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    </script>
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    </script>
+    <script>
+        var pathname;
+    $(function() {
+                //pathname = "http://youtube.com/watch/"+currentVideo;
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    </script>
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+      //pathname = "http://youtube.com/watch/"+currentVideo;
+    // init the FB JS SDK
+    FB.init({
+      appId      : '1382346558721261', // App ID from the App Dashboard
+      status     : true, // check the login status upon init?
+      cookie     : true, // set sessions cookies to allow your server to access the session?
+      xfbml      : true  // parse XFBML tags on this page?
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+    FB.ui(
+      {
+        method: 'feed',
+        name: 'YouPlay Radio', // name of the product or content you want to share
+        link: pathname, // link back to the product or content you are sharing
+        picture: 'http://youplayradio.github.io/img/icons/Play_Workout.png', // path to an image you would like to share with this content
+        caption: 'I found this song through YouPlay Radio!', // caption
+        description: 'I love this song!' // description of your product or content
+      },
+      function(response) {
+
+      }
+    );
+
+  };
+
+ // Load the SDK Asynchronously
+ function fb_callout() {
+    pathname = "http://youtube.com/watch/"+currentVideo;
+     (function(d){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         ref.parentNode.insertBefore(js, ref);
+         }(document));
+     }
+</script> 
+</body>
+
+</html>
